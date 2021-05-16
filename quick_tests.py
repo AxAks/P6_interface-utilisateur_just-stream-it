@@ -10,9 +10,11 @@ url_genres = 'http://localhost:8000/api/v1/genres/'
 def main():
     pass
 
+
 def get_response(url):
     response = requests.get(url_titles)
     print(response)
+
 
 def get_content(url):
     json = requests.get(url_titles).json()

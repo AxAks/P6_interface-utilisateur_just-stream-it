@@ -8,19 +8,24 @@
 <header>
     <div>
         <h1>Just Stream It !</h1>
+        <h2>Interroger l'API</h2>
     </div>
 </header>
 
 <body>
     <section>
-        <h1>Clique sur le bouton !</h1>
-        <button><a href="./test.html" target="_blank">Ce bouton</a></button>
+        <p>
+            Clique sur le bouton !
+            <button onclick="fetchAllTitles()">Ce bouton</button>
+            <!--<button><a href="http://localhost:8000/api/v1/titles/">Ce bouton</a></button>-->
+
+        </p>
     </section>
 
+    <footer>
+        <p> Just Stream It ! </p>
+    </footer>
+
+<script type="text/javascript" src="just_stream_it.js"> <!-- Javascript Code // --> </script>
 </body>
-
-<footer>
-  <p> Just Stream It ! </p>
-</footer>
-
 </html>
