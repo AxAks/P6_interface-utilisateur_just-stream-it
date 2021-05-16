@@ -3,7 +3,7 @@
 */
 async function fetchAllTitles(url){
 
-    let response = await fetch('http://localhost:8000/api/v1/titles/1892')
+    let response = await fetch('http://localhost:8000/api/v1/titles/')
     console.log(response.status)
     console.log(response.statusText)
     let data = await response.text()  //json(), blob(), formData() and arrayBuffer() selon le type de data
