@@ -6,7 +6,7 @@ async function fetchAllTitles(url){
     let response = await fetch('http://localhost:8000/api/v1/titles/')
     console.log(response.status)
     console.log(response.statusText)
-    let data = await response.text()  //json(), blob(), formData() and arrayBuffer() selon le type de data
+    let data = await response.json()  //json(), blob(), formData() and arrayBuffer() selon le type de data
     console.log(data)
 };
 /*
@@ -18,3 +18,12 @@ async function fetchAllTitles(url){
     })
 };
 */
+
+async function fetchTopRatedTitle(url){
+
+    let response = await fetch('http://localhost:8000/api/v1/titles/?sort_by=-imdb_score')
+    console.log(response.status)
+    console.log(response.statusText)
+    let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
+    console.log(data)
+};
