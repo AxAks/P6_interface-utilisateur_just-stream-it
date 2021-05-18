@@ -5,3 +5,11 @@ header {
 section {
     text-align: center;
 }
+
+body {
+    background-color: grey;
+}
+
+footer {
+    text-align: right;
+}
