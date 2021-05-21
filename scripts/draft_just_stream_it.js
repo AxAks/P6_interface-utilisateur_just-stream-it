@@ -5,16 +5,14 @@
 // CONSTANTS
 const MAIN_ENDPOINT = 'http://localhost:8000/api/v1/titles/'
 const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
-const SORTED_BY_IMDB_SCORE_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score'
 
 // Juste un 1er test pour voir 
 async function fetchFirstPage(url){
     // ca ne liste que les 5 resultats de la page 1 !!
-    let response = await fetch(MAIN_ENDPOINT)
-    console.log(response.status)
-    console.log(response.statusText)
-    let data = await response.json()  // text(), json(), blob(), formData() and arrayBuffer() selon le type de data
-    console.log(data)
+    let response = await fetch(MAIN_ENDPOINT);
+    console.table(response.status, response.statusText);
+    let data = await response.json(); // text(), json(), blob(), formData() and arrayBuffer() selon le type de data
+    console.table(data);
 };
 
 /*
@@ -65,9 +63,9 @@ async function fetchAllPagesSortedTitles(url){
 // recupéré le infos détaillées d'un film via son ID (ici, je recupère que l'ID pour tester)
 async function fetchOneFilmbyID(url){
     let response = await fetch('http://localhost:8000/api/v1/titles/1508669')
-    console.log("Statut page 1: " + response.status + " " + response.statusText)
+    console.table("Statut page 1: " + response.status + " " + response.statusText)
     let film_infos = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
-    console.log(film_infos.id, film_infos.actors, film_infos.directors)
+    console.table(film_infos.id, film_infos.actors, film_infos.directors)
     return film_infos.id
 }
 
@@ -76,7 +74,7 @@ async function fetchFiveTopTitles(url){
     let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT)
     let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
     let results = await data["results"]
-    console.log(results)
+    console.table(results)
     return results
 }
 
@@ -84,18 +82,18 @@ async function fetchFiveTopTitles(url){
 async function fetchTopRatedTitleID(url){
     let topFive = await fetchFiveTopTitles()
     let bestMovieID = await topFive[0].id
-    console.log(bestMovieID)
+    console.table(bestMovieID)
     return bestMovieID
 }
 
 // on doit pouvoir atteindre les pages suivantes 2 etc...
 async function fetchTopRatedTitles(url){
     let response = await fetch('http://localhost:8000/api/v1/titles/?sort_by=-imdb_score')
-    console.log("Statut page 1: " + response.status + " " + response.statusText)
+    console.table("Statut page 1: " + response.status + " " + response.statusText)
     let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
-    console.log(data)
+    console.table(data)
     let results = await data["results"]
-    console.log(results)
+    console.table(results)
     let bestMovie = await results[0]
     console.table(bestMovie.actors)
 }
@@ -105,7 +103,7 @@ async function getImageFromURL(url) {
     let response = await fetch('https://m.media-amazon.com/images/M/MV5BM2EzM2M0Y2UtNjNiMC00YTdiLTg5NDctYmRkZDA5NTRiMjcwXkEyXkFqcGdeQXVyMTc2NzkyNzk@._V1_UX182_CR0,0,182,268_AL_.jpg')
     .then(response => response.json()
     .then(data => {
-    console.log(data)
+    console.table(data)
     let ele = document.createElement("span");
     let img = document.createElement("img");
         }));
@@ -116,7 +114,7 @@ Exemple pour récupérer une image via une url avec fetch:
 fetch('https://api.github.com/emojis')
 .then(response => response.json())
 .then(data => {
- console.log(data) // Prints result from `response.json()` in getRequest
+ console.table(data) // Prints result from `response.json()` in getRequest
   Object.keys(data).forEach((key) => {
     let ele = document.createElement("span");
     let img = document.createElement("img");
