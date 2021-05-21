@@ -2,11 +2,15 @@
 * Getting data from OCMovies Titles and handling errors
 */
 
+// CONSTANTS
+const MAIN_ENDPOINT = 'http://localhost:8000/api/v1/titles/'
+const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
+const SORTED_BY_IMDB_SCORE_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score'
 
 // Juste un 1er test pour voir 
 async function fetchFirstPage(url){
     // ca ne liste que les 5 resultats de la page 1 !!
-    let response = await fetch('http://localhost:8000/api/v1/titles/')
+    let response = await fetch(MAIN_ENDPOINT)
     console.log(response.status)
     console.log(response.statusText)
     let data = await response.json()  // text(), json(), blob(), formData() and arrayBuffer() selon le type de data
@@ -62,16 +66,16 @@ async function fetchAllPagesSortedTitles(url){
 async function fetchOneFilmbyID(url){
     let response = await fetch('http://localhost:8000/api/v1/titles/1508669')
     console.log("Statut page 1: " + response.status + " " + response.statusText)
-    var film_infos = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
+    let film_infos = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
     console.log(film_infos.id, film_infos.actors, film_infos.directors)
     return film_infos.id
 }
 
 // recup des 5 meilleurs films (1ere page)
 async function fetchFiveTopTitles(url){
-    let response = await fetch('http://localhost:8000/api/v1/titles/?sort_by=-imdb_score')
-    var data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
-    var results = await data["results"]
+    let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT)
+    let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
+    let results = await data["results"]
     console.log(results)
     return results
 }
@@ -79,7 +83,7 @@ async function fetchFiveTopTitles(url){
 // recup ID des 5 meilles films, reutilisation d'une fonction grace au retour de valeur
 async function fetchTopRatedTitleID(url){
     let topFive = await fetchFiveTopTitles()
-    var bestMovieID = await topFive[0].id
+    let bestMovieID = await topFive[0].id
     console.log(bestMovieID)
     return bestMovieID
 }
@@ -88,12 +92,12 @@ async function fetchTopRatedTitleID(url){
 async function fetchTopRatedTitles(url){
     let response = await fetch('http://localhost:8000/api/v1/titles/?sort_by=-imdb_score')
     console.log("Statut page 1: " + response.status + " " + response.statusText)
-    var data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
+    let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
     console.log(data)
-    var results = await data["results"]
+    let results = await data["results"]
     console.log(results)
-    var bestMovie = await results[0]
-    alert(bestMovie.actors)
+    let bestMovie = await results[0]
+    console.table(bestMovie.actors)
 }
 
 // tentative ratée de recupérer une image
@@ -102,8 +106,8 @@ async function getImageFromURL(url) {
     .then(response => response.json()
     .then(data => {
     console.log(data)
-    var ele = document.createElement("span");
-    var img = document.createElement("img");
+    let ele = document.createElement("span");
+    let img = document.createElement("img");
         }));
     alert(data)
 /*
@@ -114,8 +118,8 @@ fetch('https://api.github.com/emojis')
 .then(data => {
  console.log(data) // Prints result from `response.json()` in getRequest
   Object.keys(data).forEach((key) => {
-    var ele = document.createElement("span");
-    var img = document.createElement("img");
+    let ele = document.createElement("span");
+    let img = document.createElement("img");
     img.setAttribute("src", data[key]);
     ele.appendChild(img);
     //append ele to parent div
