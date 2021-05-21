@@ -46,6 +46,7 @@ async function fetchAllPagesSortedTitles(url){
         // data.forEach(e => allData.unshift(e)); // data is not undefined...?
         morePagesAvailable = currentPage < total_pages;
       }
+      console.log(allData)
       return allData;
     } 
 
@@ -62,28 +63,14 @@ async function fetchAllPagesSortedTitles(url){
 
 // recupéré le infos détaillées d'un film via son ID (ici, je recupère que l'ID pour tester)
 async function fetchOneFilmbyID(url){
-    let response = await fetch('http://localhost:8000/api/v1/titles/1508669')
-    console.table("Statut page 1: " + response.status + " " + response.statusText)
-    let film_infos = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
-    console.table(film_infos.id, film_infos.actors, film_infos.directors)
+    let response = await fetch('http://localhost:8000/api/v1/titles/11207902')
+    console.table("Statut page 1: " + response.status + " " + response.statusText);
+    let film_infos = await response.json(); //json(), blob(), formData() and arrayBuffer() selon le type de data
+    console.log(film_infos.id, film_infos.title, film_infos.image_url, film_infos.genres, film_infos.date_published) //toutes les infos à recupérer !!
+    console.log(film_infos.rated, film_infos.imdb_score, film_infos.directors) //toutes les infos à recupérer !!
+    console.log(film_infos.actors, film_infos.duration, film_infos.countries) //toutes les infos à recupérer !!
+    console.log(film_infos.worldwide_gross_income, film_infos.description); //toutes les infos à recupérer !!
     return film_infos.id
-}
-
-// recup des 5 meilleurs films (1ere page)
-async function fetchFiveTopTitles(url){
-    let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT)
-    let data = await response.json() //json(), blob(), formData() and arrayBuffer() selon le type de data
-    let results = await data["results"]
-    console.table(results)
-    return results
-}
-
-// recup ID des 5 meilles films, reutilisation d'une fonction grace au retour de valeur
-async function fetchTopRatedTitleID(url){
-    let topFive = await fetchFiveTopTitles()
-    let bestMovieID = await topFive[0].id
-    console.table(bestMovieID)
-    return bestMovieID
 }
 
 // on doit pouvoir atteindre les pages suivantes 2 etc...
