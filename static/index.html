@@ -17,21 +17,27 @@
     <section>
         <p>
             Simple appel de la premiere page:
-            <button onclick="fetchFirstPage()">Clique sur ce bouton</button>
+            <button onclick="fetchFirstPage()"> les 5 films de la page 1</button>
+        </p>
+        <p>
+            Recupération du film #11207902 via l'ID:
+            <button onclick="fetchOneFilmbyID()">Film ID 11207902</button>
         </p>
     </section>
     <section>
         <p>
-            Recup 1 specific film par ID :
-            <button onclick="fetchOneFilmbyID()">Ce bouton</button>
+            Récupération de Films sur plusieurs pages:
+            <button onclick="fetchTitlesOnSeveralPages()">Films des 4 premières pages</button>
         </p>
+    </section>
+    <section>
         <p>
-            Meilleur Film (Mieux noté):
-            <button onclick="fetchTopFilmInfos()">Ce bouton</button>
+            Récupération du Meilleur Film (Mieux noté):
+            <button onclick="fetchTopFilmInfos()">Meilleur Film</button>
         </p>
                 <p>
-            Films les mieux notés:
-            <button onclick="fetchTopSevenFilmInfos()">Ce bouton</button>
+            Les 7 Films les mieux notés: <!--pour le moment 5 films-->
+            <button onclick="fetchTopSevenFilmInfos()">Les 7 Meilleurs Films</button>
         </p>
         <p>
             get all titles classés par note IMDB:
@@ -39,16 +45,16 @@
 
         </p>
         <p>
-            Catégorie 2:
-            <button onclick="fetchAllPagesSortedTitles()">Ce bouton</button>
+            Les 7 Films les plus récents:
+            <button onclick="fetchAllPagesSortedTitles()">7 Films les plus récents</button>
         </p>
         <p>
-            Catégorie 3:
-            <button onclick="fetchAllPagesSortedTitles()">Ce bouton</button>
+            Catégorie par genre 1:
+            <button onclick="fetchAllPagesSortedTitles()">Catégorie Genre 1</button>
         </p>
         <p>
-            Catégorie 4:
-            <button onclick="fetchAllPagesSortedTitles()">Ce bouton</button>
+            Catégorie par genre 2:
+            <button onclick="fetchAllPagesSortedTitles()">Catégorie Genre 2</button>
         </p>
     </section>
 
@@ -57,7 +63,7 @@
     </footer>
 
 <script type="text/javascript" src="../scripts/draft_just_stream_it.js"> <!-- Javascript Code // --> </script>
-
+<script type="text/javascript" src="../scripts/get_all_pages.js"> <!-- Javascript Code // --> </script>
 <script type="text/javascript" src="../scripts/top_film.js"> <!-- Javascript Code // --> </script>
 <script type="text/javascript" src="../scripts/top_seven_films.js"> <!-- Javascript Code // --> </script>
 <script type="text/javascript" src="../scripts/new_releases.js"> <!-- Javascript Code // --> </script>

@@ -1,19 +1,20 @@
 const SORTED_BY_IMDB_SCORE_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score'
 
-async function fetchTopFilmID(url){
+async function fetchTopFilmURL(url){
     let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT);
     console.table(response.status, response.statusText);
     let data = await response.json(); //on recupere les 5 films les mieux notés, ca suffit : on ne veut que le 1er !
     let results = await data.results
-    let TopFilmID = await results[0].id
-    console.table(TopFilmID)
-    return TopFilmID
+    let TopFilmTitle = await results[0].title
+    let TopFilmURL = await results[0].url
+    console.table(TopFilmTitle, TopFilmURL)
+    return TopFilmURL
 };
 
 
-async function fetchTopFilmInfos(film_id){
-    let TopFilmID = await fetchTopFilmID()
-    let response = await fetch(`http://localhost:8000/api/v1/titles/${TopFilmID}`);
+async function fetchTopFilmInfos(film_url){
+    let TopFilmURL = await fetchTopFilmURL()
+    let response = await fetch(TopFilmURL);
     let TopFilmInfos = await response.json();
     console.table(TopFilmInfos);
     console.log(TopFilmInfos.id, TopFilmInfos.title, TopFilmInfos.image_url, TopFilmInfos.genres, TopFilmInfos.date_published) //toutes les infos à recupérer !!
