@@ -5,7 +5,7 @@ async function fetchBestTwentyFilms(page_url){
     let max_pages = 3; // on s'arrete à 2 apges ici mais pas clair on peut changer le nombre de pages ici (5 resultats par page)
 
     while(page_nb < max_pages) {
-        page_url = `http://localhost:8000/api/v1/titles/?page=${page_nb}&sort_by=-imdb_score` //on peut changer le filtre ici
+        page_url = `http://localhost:8000/api/v1/titles/?page=${page_nb}&sort_by=-votes&sort_by=-imdb_score` //on peut changer le filtre ici
         let response = await fetch(page_url);
         page_nb++
         let data = await response.json();

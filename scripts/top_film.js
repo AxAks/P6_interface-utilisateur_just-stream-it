@@ -1,4 +1,4 @@
-const SORTED_BY_IMDB_SCORE_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score'
+const SORTED_BY_IMDB_SCORE_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-votes&sort_by=-imdb_score'
 
 async function fetchTopFilmURL(){
     let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT);
