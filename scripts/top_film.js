@@ -1,3 +1,4 @@
+// je peux factoriser ici aussi si je sors "expected_pages" de l'autre fonction
 async function fetchTop5FilmsURL(page_url=BEST_FILMS_OF_ALL_ENDPOINT){
     let response = await fetch(page_url);
     console.table(response.status, response.statusText);
@@ -8,7 +9,6 @@ async function fetchTop5FilmsURL(page_url=BEST_FILMS_OF_ALL_ENDPOINT){
     console.table(TopFilmTitle, TopFilmURL)
     return TopFilmURL
 };
-
 
 async function fetchTopFilmInfos(){
     let TopFilmURL = await fetchTop5FilmsURL()
