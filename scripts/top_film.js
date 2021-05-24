@@ -1,5 +1,5 @@
-async function fetchTop5FilmsURL(){
-    let response = await fetch(SORTED_BY_IMDB_SCORE_ENDPOINT);
+async function fetchTop5FilmsURL(page_url=BEST_FILMS_OF_ALL_ENDPOINT){
+    let response = await fetch(page_url);
     console.table(response.status, response.statusText);
     let data = await response.json(); //on recupere les 5 films les mieux notés, ca suffit : on ne veut que le 1er !
     let results = await data.results
