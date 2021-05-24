@@ -15,8 +15,8 @@ async function fetchTopTenDramaURLs(page_url=BEST_DRAMA_FILMS_ENDPOIND) { //on p
     return allURLs;
 }
 
-// recuperation des infos des 7 meilleurs drames
-async function fetchTopSevenDramaFilmInfos(){
+// recuperation des urls des 7 meilleurs drames
+async function fetchTopSevenDramaURLs(){
     let pagesFilmsURLs = await fetchTopTenDramaURLs(); // on recupere les films les mieux notés sur 2 pages (10 films)
     let firstSevenDramasURLs = [];
     i = 0
@@ -26,4 +26,18 @@ async function fetchTopSevenDramaFilmInfos(){
     };
     console.table(firstSevenDramasURLs);
     return firstSevenDramasURLs;
+}
+
+async function fetchTopSevenDramaInfos(){
+    let topSevenDramaURLs = await fetchTopSevenDramaURLs();
+    topSevenDramaInfos = [];
+    i = 0;
+    while(topSevenDramaInfos.length < 7) {
+        response = await fetch (topSevenDramaURLs[i]);
+        filmInfos = await response.json();
+        topSevenDramaInfos.push(filmInfos);
+        i++;
+    };
+    console.table(topSevenDramaInfos);
+    return topSevenDramaInfos;
 }

@@ -15,8 +15,8 @@ async function fetchTopTenFilmsURLs(page_url=BEST_FILMS_OF_ALL_ENDPOINT){ //on p
     return allURLs;
 }
 
-// recuperation des infos des 7 meilleurs films
-async function fetchTopSevenFilmInfos(){
+// recuperation des urls des 7 meilleurs films
+async function fetchTopSevenFilmsURLs(){
     let pagesFilmsURLs = await fetchTopTenFilmsURLs(); // on recupere les films les mieux notés sur 2 pages (10 films)
     let firstSevenFilmsURLs = [];
     i = 0
@@ -26,4 +26,18 @@ async function fetchTopSevenFilmInfos(){
     };
     console.table(firstSevenFilmsURLs);
     return firstSevenFilmsURLs;
+}
+
+async function fetchTopSevenFilmInfos(){
+    let topSevenFilmsURLs = await fetchTopSevenFilmsURLs();
+    topSevenFilmsInfos = [];
+    i = 0;
+    while(topSevenFilmsInfos.length < 7) {
+        response = await fetch (topSevenFilmsURLs[i]);
+        filmInfos = await response.json();
+        topSevenFilmsInfos.push(filmInfos);
+        i++;
+    };
+    console.table(topSevenFilmsInfos);
+    return topSevenFilmsInfos;
 }

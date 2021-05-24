@@ -15,8 +15,8 @@ async function fetchTopTenFamilyURLs(page_url=BEST_FAMILY_FILMS_ENDPOIND){ //on 
     return allURLs;
 }
 
-// recuperation des infos des 7 meilleurs films familiaux
-async function fetchTopSevenFamilyFilmInfos(){
+// recuperation des urls des 7 meilleurs films familiaux
+async function fetchTopSevenFamilyURLs(){
     let pagesFilmsURLs = await fetchTopTenFamilyURLs(); // on recupere les films les mieux notés sur 2 pages (10 films)
     let firstSevenFamilyURLs = [];
     i = 0
@@ -26,4 +26,18 @@ async function fetchTopSevenFamilyFilmInfos(){
     };
     console.table(firstSevenFamilyURLs);
     return firstSevenFamilyURLs;
+}
+
+async function fetchTopSevenFamilyInfos(){
+    let topSevenFamilyURLs = await fetchTopSevenFamilyURLs();
+    topSevenFamilyInfos = [];
+    i = 0;
+    while(topSevenFamilyInfos.length < 7) {
+        response = await fetch (topSevenFamilyURLs[i]);
+        filmInfos = await response.json();
+        topSevenFamilyInfos.push(filmInfos);
+        i++;
+    };
+    console.table(topSevenFamilyInfos);
+    return topSevenFamilyInfos;
 }

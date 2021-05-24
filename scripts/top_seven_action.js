@@ -15,8 +15,8 @@ async function fetchTopTenActionURLs(page_url=BEST_ACTION_FILMS_ENDPOIND){ //on 
     return allURLs;
 }
 
-// recuperation des infos des 7 meilleurs films d'action
-async function fetchTopSevenActionFilmInfos(){
+// recuperation des urls des 7 meilleurs films d'action
+async function fetchTopSevenActionURLs(){
     let pagesFilmsURLs = await fetchTopTenActionURLs(); // on recupere les films les mieux notés sur 2 pages (10 films)
     let firstSevenActionURLs = [];
     i = 0
@@ -26,4 +26,18 @@ async function fetchTopSevenActionFilmInfos(){
     };
     console.table(firstSevenActionURLs);
     return firstSevenActionURLs;
+}
+
+async function fetchTopSevenActionInfos(){
+    let topSevenActionoURLs = await fetchTopSevenActionURLs();
+    topSevenActionInfos = [];
+    i = 0;
+    while(topSevenActionInfos.length < 7) {
+        response = await fetch (topSevenActionoURLs[i]);
+        filmInfos = await response.json();
+        topSevenActionInfos.push(filmInfos);
+        i++;
+    };
+    console.table(topSevenActionInfos);
+    return topSevenActionInfos;
 }
