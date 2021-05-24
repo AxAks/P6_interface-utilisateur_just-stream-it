@@ -14,7 +14,17 @@
 </header>
 
 <body>
+    <aside>
+        <p>
+            Récupération du Meilleur Film (Mieux noté):
+            <button onclick="fetchTopFilmInfos()">Meilleur Film</button>
+        </p>
+    </aside>
     <section>
+        <p>
+            Récupération de Films sur plusieurs pages:
+            <button onclick="fetchTitlesOnSeveralPages()">Films des 4 premières pages</button>
+        </p>
         <p>
             Simple appel de la premiere page:
             <button onclick="fetchFirstPage()"> les 5 films de la page 1</button>
@@ -26,16 +36,6 @@
     </section>
     <section>
         <p>
-            Récupération de Films sur plusieurs pages:
-            <button onclick="fetchTitlesOnSeveralPages()">Films des 4 premières pages</button>
-        </p>
-    </section>
-    <section>
-        <p>
-            Récupération du Meilleur Film (Mieux noté):
-            <button onclick="fetchTopFilmInfos()">Meilleur Film</button>
-        </p>
-                <p>
             Les 7 Films les mieux notés: <!--pour le moment 5 films-->
             <button onclick="fetchTopSevenFilmInfos()">Les 7 Meilleurs Films</button>
         </p>
