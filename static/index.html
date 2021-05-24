@@ -14,35 +14,16 @@
 </header>
 
 <body>
-    <aside>
+    <section class="recup_ok">
         <p>
             Récupération du Meilleur Film (Mieux noté):
             <button onclick="fetchTopFilmInfos()">Meilleur Film</button>
         </p>
-    </aside>
-    <section>
-        <p>
-            Récupération de Films sur plusieurs pages:
-            <button onclick="fetchTitlesOnSeveralPages()">Films des 4 premières pages</button>
-        </p>
-        <p>
-            Simple appel de la premiere page:
-            <button onclick="fetchFirstPage()"> les 5 films de la page 1</button>
-        </p>
-        <p>
-            Recupération du film #11207902 via l'ID:
-            <button onclick="fetchOneFilmbyID()">Film ID 11207902</button>
-        </p>
     </section>
-    <section>
+    <section class="in_progress">
         <p>
             Les 7 Films les mieux notés: <!--pour le moment 5 films-->
             <button onclick="fetchTopSevenFilmInfos()">Les 7 Meilleurs Films</button>
-        </p>
-        <p>
-            get all titles classés par note IMDB:
-            <button onclick="fetchTitlesOnSeveralPages()">Ce bouton</button>
-
         </p>
         <p>
             Catégorie par genre 1:
@@ -52,8 +33,21 @@
             Catégorie par genre 2:
             <button onclick="fetchAllGenres()">Catégorie Genre 2</button>
         </p>
+        <p>
+            Catégorie par genre 3:
+            <button onclick="fetchAllGenres()">Catégorie Genre 3</button>
+        </p>
     </section>
-
+    <section class="just_tests">
+        <p>
+            Récupération de Films sur plusieurs pages:
+            <button onclick="fetchTitlesOnAlllPages()">Films des 4 premières pages</button>
+        </p>
+        <p>
+            Recupération du film #11207902 via l'ID:
+            <button onclick="fetchOneFilmbyID()">Film ID 11207902</button>
+        </p>
+    </section>
     <footer>
         <p> Just Stream It ! </p>
     </footer>

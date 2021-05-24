@@ -14,6 +14,18 @@ footer {
     text-align: right;
 }
 
-aside {
-    text-align: left;
+.recup_ok {
+    color:greenyellow
 }
+
+.in_progress {
+    color: red;
+}
+
+.just_tests {
+    color:green
+}
+/* 
+sans point : balise
+avec un point : class
+*/
