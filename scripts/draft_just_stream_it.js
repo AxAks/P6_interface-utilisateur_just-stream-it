@@ -15,40 +15,7 @@ async function fetchFirstPage(url){
     console.table(data);
 };
 
-/*
-async function fetchMetaData() {
-  let allData = [];
-  let morePagesAvailable = true;
-  let currentPage = 0;
 
-  while(morePagesAvailable) {
-    currentPage++;
-    const response = await fetch(`http://api.dhsprogram.com/rest/dhs/data?page=${currentPage}`)
-    let { data, total_pages } = await response.json();
-    data.forEach(e => allData.unshift(e));
-    morePagesAvailable = currentPage < total_pages;
-  }
-
-  return allData;
-}
-*/
-
-// Essai recupération de plusieurs pages 
-async function fetchAllPagesSortedTitles(url){
-    let allData = [];
-    let morePagesAvailable = true;
-    let currentPage = 1;
-
-    while(morePagesAvailable) {
-        currentPage++;
-        const response = await fetch('http://localhost:8000/api/v1/titles/?page=${currentPage}&sort_by=-imdb_score')
-        let { data, total_pages } = await response.json();
-        // data.forEach(e => allData.unshift(e)); // data is not undefined...?
-        morePagesAvailable = currentPage < total_pages;
-      }
-      console.log(allData)
-      return allData;
-    } 
 
 /*
     // pour le traitement des infos et la gestion des erreurs  
