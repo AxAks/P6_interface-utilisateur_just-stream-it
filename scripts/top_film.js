@@ -15,9 +15,9 @@ async function fetchTopFilmInfos(){
     let response = await fetch(TopFilmURL);
     let TopFilmInfos = await response.json();
     console.table(TopFilmInfos);
-    console.table(TopFilmInfos.id, TopFilmInfos.title, TopFilmInfos.image_url, TopFilmInfos.genres, TopFilmInfos.date_published) //toutes les infos à recupérer !!
-    console.table(TopFilmInfos.rated, TopFilmInfos.imdb_score, TopFilmInfos.directors) //toutes les infos à recupérer !!
-    console.table(TopFilmInfos.actors, TopFilmInfos.duration, TopFilmInfos.countries) //toutes les infos à recupérer !!
-    console.table(TopFilmInfos.worldwide_gross_income, TopFilmInfos.description); //toutes les infos à recupérer !!
+    console.log(TopFilmInfos.id, TopFilmInfos.title, TopFilmInfos.image_url, TopFilmInfos.genres, TopFilmInfos.date_published) //toutes les infos à recupérer !!
+    console.log(TopFilmInfos.rated, TopFilmInfos.imdb_score, TopFilmInfos.directors) //toutes les infos à recupérer !!
+    console.log(TopFilmInfos.actors, TopFilmInfos.duration, TopFilmInfos.countries) //toutes les infos à recupérer !!
+    console.log(TopFilmInfos.worldwide_gross_income, TopFilmInfos.description); //toutes les infos à recupérer !!
     return TopFilmInfos
 }
