@@ -17,47 +17,33 @@
     <section class="recup_ok">
         <p>
             Récupération du Meilleur Film (Mieux noté):
-            <button onclick="fetchTopFilmInfos()">Meilleur Film</button>
+            <button onclick="fetchTopFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Meilleur Film</button>
+        </p>
+        <p>
+            Les 7 Films les mieux notés:
+            <button onclick="fetchTopSevenFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Les 7 Meilleurs Films</button>
         </p>
     </section>
     <section class="in_progress">
         <p>
-            Les 7 Films les mieux notés: <!--pour le moment 5 films-->
-            <button onclick="fetchTopSevenFilmInfos()">Les 7 Meilleurs Films</button>
-        </p>
-        <p>
             Meilleurs Films d'Action:
-            <button onclick="fetchTopSevenActionInfos()">Catégorie Action</button>
-        </p>
-        <p>
-            Meilleurs Drames:
-            <button onclick="fetchTopSevenDramaInfos()">Catégorie Drames</button>
+            <button onclick="fetchTopSevenFilmInfos(BEST_ACTION_FILMS_ENDPOIND)">Catégorie Action</button>
         </p>
         <p>
             Meileurs Films Familiaux:
-            <button onclick="fetchTopSevenFamilyInfos()">Catégorie Familial</button>
-        </p>
-    </section>
-    <section class="just_tests">
-        <p>
-            Récupération de Films sur plusieurs pages:
-            <button onclick="fetchTitlesOnAlllPages()">Films des 4 premières pages</button>
+            <button onclick="fetchTopSevenFilmInfos(BEST_FAMILY_FILMS_ENDPOIND)">Catégorie Familial</button>
         </p>
         <p>
-            Recupération du film #11207902 via l'ID:
-            <button onclick="fetchOneFilmbyID()">Film ID 11207902</button>
+            Meilleurs Drames:
+            <button onclick="fetchTopSevenFilmInfos(BEST_DRAMA_FILMS_ENDPOIND)">Catégorie Drames</button>
         </p>
     </section>
     <footer>
         <p> Just Stream It ! </p>
     </footer>
 
-<script type="text/javascript" src="../scripts/draft_just_stream_it.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/get_all_pages.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/top_film.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/top_seven_films.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/top_seven_action.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/top_seven_drama.js"> <!-- Javascript Code // --> </script>
-<script type="text/javascript" src="../scripts/top_seven_family.js"> <!-- Javascript Code // --> </script>
+<script type="text/javascript" src="../scripts/constants.js"> <!-- Javascript Code // --> </script>
+<script type="text/javascript" src="../scripts/tops_films.js"> <!-- Javascript Code // --> </script>
+
 </body>
 </html>

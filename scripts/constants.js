@@ -7,23 +7,9 @@ const MAIN_ENDPOINT = 'http://localhost:8000/api/v1/titles/'
 const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
 const BEST_FILMS_OF_ALL_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&sort_by=-votes'
 const BEST_ACTION_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes'
-const BEST_DRAMA_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes'
-const BEST_FAMILY_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes'
+const BEST_DRAMA_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score&sort_by=-votes'
+const BEST_FAMILY_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=family&sort_by=-imdb_score&sort_by=-votes'
 const TEST_DETAILED_TITLE_ENDPOINT = 'http://localhost:8000/api/v1/titles/11207902'
-
-
-// recupéré le infos détaillées d'un film via son ID (ici, je recupère que l'ID pour tester)
-async function fetchOneFilmbyID(url){
-    let response = await fetch(TEST_DETAILED_TITLE_ENDPOINT);
-    console.table("Statut page 1: " + response.status + " " + response.statusText);
-    let film_infos = await response.json(); //json(), blob(), formData() and arrayBuffer() selon le type de data
-    console.log(film_infos.id, film_infos.title, film_infos.image_url, film_infos.genres, film_infos.date_published); //toutes les infos à recupérer !!
-    console.log(film_infos.rated, film_infos.imdb_score, film_infos.directors); //toutes les infos à recupérer !!
-    console.log(film_infos.actors, film_infos.duration, film_infos.countries); //toutes les infos à recupérer !!
-    console.log(film_infos.worldwide_gross_income, film_infos.description); //toutes les infos à recupérer !!
-    return film_infos.id;
-}
-
 
 
 // consigne !!
