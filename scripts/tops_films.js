@@ -12,7 +12,6 @@ async function fetchTopTenFilmsURLs(page_url){
         data.results.forEach(film => allURLs.push(film.url));
         page_url = await data.next;
     };
-    console.log(allURLs)
     return allURLs;
 };
 
@@ -25,7 +24,6 @@ async function fetchTopSevenFilmsURLs(page_url){
         firstSevenFilmsURLs.push(pagesFilmsURLs[i]);
         i++; 
     };
-    console.log(firstSevenFilmsURLs);
     return firstSevenFilmsURLs;
 }
 
@@ -40,15 +38,12 @@ async function fetchTopSevenFilmInfos(page_url){
         topSevenFilmsInfos.push(filmInfos);
         i++;
     };
-    console.log(topSevenFilmsInfos);
-    for (filmInfos of topSevenFilmsInfos) {
-        console.log(   //toutes les infos à recupérer !!
-            filmInfos.id, filmInfos.title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
-            filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-            filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description
-            )
+    for (filmInfos of topSevenFilmsInfos) {//toutes les infos à recupérer !!   
+        console.log(filmInfos.id, filmInfos.title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
+        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
+        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description)
     };
-    return topSevenFilmsInfos;
+    return topSevenFilmsInfos
 };
 
 // recuperation des infos du meilleur film
