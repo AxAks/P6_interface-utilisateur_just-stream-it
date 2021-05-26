@@ -44,7 +44,7 @@ async function fetchTopSevenFilmInfos(page_url){
         filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
         )
     };
-    return topSevenFilmsInfos.url
+    return topSevenFilmsInfos
 };
 
 // recuperation des infos du meilleur film
@@ -60,3 +60,48 @@ async function fetchTopFilmInfos(page_url){
         )
     return filmInfos
 };
+
+
+async function displayFilmImage(page_url) {
+    let filmInfos = await fetchTopFilmInfos(page_url)
+    let filmPosterURL = await filmInfos.image_url;
+    console.log("hello", filmPosterURL);
+    let response = await fetch(filmPosterURL);
+    console.log("hello2", response);
+    let FilmPosterBlob = await response.blob();
+    console.log("hello3", FilmPosterBlob);
+
+    let reader = new FileReader();
+    let FilmPosterAsDataURL = reader.readAsDataURL(FilmPosterBlob);
+    console.log("hello4", FilmPosterAsDataURL); // undefined !!!
+    FilmPoster = await FilmPosterAsDataURL.result;
+    console.log("hello5", FilmPoster);
+    return FilmPoster
+}
+
+/*
+var reader = new FileReader();
+reader.readAsDataURL(blob); 
+reader.onloadend = function() {
+   base64data = reader.result;     
+}
+
+
+    const blobToImage = (FilmsPosterBlob) => {
+        return new Promise(resolve => {
+            const url = URL.createObjectURL(FilmsPosterBlob)
+            let img = new Image()
+            img.onload = () => {
+                URL.revokeObjectURL(url)
+                resolve(img)
+            }
+          img.src = url
+        })
+    }
+*/
+    //document.getElementById("filmPoster").innerHTML;
+
+    
+//    let objectURL = URL.createObjectURL(filmPoster);
+  //  let myImage = document.getElementById("my-img");
+    //myImage.src = objectURL;

@@ -20,11 +20,6 @@ footer {
 }
 
 /* test */
-.topfilmframe {
-    color: blue;
-}
-
-/* test */
 .in_progress {
     color: red;
 }
@@ -39,15 +34,17 @@ avec un point : class
 */
 
 .containerTopFilm {
+    outline-color: blue;
     position: relative;
     overflow: hidden;
-    width: 100%;
-    padding-top: 60%;
+    width: 100%;;
+    /*padding-top: 60%;*/
   }
 
   .containerTopSeven {
+    outline-color: violet;
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 15%;
+    /*padding-top: 15%;*/
   }
