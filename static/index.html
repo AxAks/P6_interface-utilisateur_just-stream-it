@@ -7,37 +7,33 @@
 </head>
 
 <header>
-    <div>
         <h1>Just Stream It !</h1>
         <h2>Interroger l'API</h2>
-    </div>
 </header>
 
 <body>
-    <section class="recup_ok">
-        <p>
-            Récupération du Meilleur Film (Mieux noté):
-            <button onclick="fetchTopFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Meilleur Film</button>
-        </p>
-        <p>
-            Les 7 Films les mieux notés:
-            <button onclick="fetchTopSevenFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Les 7 Meilleurs Films</button>
-        </p>
-    </section>
-    <section class="in_progress">
-        <p>
-            Meilleurs Films d'Action:
+    <main>
+    <iframe class= "containerTopFilm topfilmframe" onload="fetchTopFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">
+            <p>Le Meilleur Film: (mettre le titre du film)</p>
+            <button onclick="fetchTopFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Meilleur Film</button>   
+    </iframe>
+    </main>
+    <iframe class="containerTopSeven in_progress" onload="fetchTopSevenFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">
+        <p>Les 7 Meilleurs Films Toute Catégorie:</p>
+        <button onclick="fetchTopSevenFilmInfos(BEST_FILMS_OF_ALL_ENDPOINT)">Les 7 Meilleurs Films</button>
+    </iframe>
+    <iframe class="containerTopSeven just_tests" onload="fetchTopSevenFilmInfos(BEST_ACTION_FILMS_ENDPOIND)">
+        <p>Les 7 Meilleurs Films d'Action:</p>
             <button onclick="fetchTopSevenFilmInfos(BEST_ACTION_FILMS_ENDPOIND)">Catégorie Action</button>
-        </p>
-        <p>
-            Meileurs Films Familiaux:
-            <button onclick="fetchTopSevenFilmInfos(BEST_FAMILY_FILMS_ENDPOIND)">Catégorie Familial</button>
-        </p>
-        <p>
-            Meilleurs Drames:
-            <button onclick="fetchTopSevenFilmInfos(BEST_DRAMA_FILMS_ENDPOIND)">Catégorie Drames</button>
-        </p>
-    </section>
+    </iframe>
+    <iframe class="containerTopSeven" onload="fetchTopSevenFilmInfos(BEST_FAMILY_FILMS_ENDPOIND)">
+        <p>Les 7 Meileurs Films Familiaux:</p>
+        <button onclick="fetchTopSevenFilmInfos(BEST_FAMILY_FILMS_ENDPOIND)">Catégorie Familial</button>
+    </iframe>
+    <iframe class="containerTopSeven" onload="fetchTopSevenFilmInfos(BEST_DRAMA_FILMS_ENDPOIND)">
+        <p>Les 7 Meilleurs Drames:</p>
+        <button onclick="fetchTopSevenFilmInfos(BEST_DRAMA_FILMS_ENDPOIND)">Catégorie Drames</button>
+    </iframe>
     <footer>
         <p> Just Stream It ! </p>
     </footer>

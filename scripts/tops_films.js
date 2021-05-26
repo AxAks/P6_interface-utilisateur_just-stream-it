@@ -38,12 +38,13 @@ async function fetchTopSevenFilmInfos(page_url){
         topSevenFilmsInfos.push(filmInfos);
         i++;
     };
-    for (filmInfos of topSevenFilmsInfos) {//toutes les infos à recupérer !!   
-        console.log(filmInfos.id, filmInfos.title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
+    for (filmInfos of topSevenFilmsInfos) {  //toutes les infos à recupérer !!   
+        console.log(filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
         filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description)
+        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
+        )
     };
-    return topSevenFilmsInfos
+    return topSevenFilmsInfos.url
 };
 
 // recuperation des infos du meilleur film
@@ -53,9 +54,9 @@ async function fetchTopFilmInfos(page_url){
     let response = await fetch(TopFilmUrl);
     let filmInfos = await response.json();
     console.log(
-        filmInfos.id, filmInfos.title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
+        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
         filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description
+        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
         )
     return filmInfos
 };

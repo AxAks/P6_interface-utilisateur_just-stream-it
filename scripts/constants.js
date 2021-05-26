@@ -4,12 +4,12 @@
 
 // CONSTANTS
 const MAIN_ENDPOINT = 'http://localhost:8000/api/v1/titles/'
-const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
 const BEST_FILMS_OF_ALL_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&sort_by=-votes'
 const BEST_ACTION_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes'
 const BEST_DRAMA_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score&sort_by=-votes'
 const BEST_FAMILY_FILMS_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=family&sort_by=-imdb_score&sort_by=-votes'
-const TEST_DETAILED_TITLE_ENDPOINT = 'http://localhost:8000/api/v1/titles/11207902'
+// plus utilisé tests ! const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
+// plus utilisé tests ! const TEST_DETAILED_TITLE_ENDPOINT = 'http://localhost:8000/api/v1/titles/11207902'
 
 
 // consigne !!

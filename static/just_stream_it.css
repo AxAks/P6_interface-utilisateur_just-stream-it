@@ -1,4 +1,5 @@
 header {
+    height: 20%;
     text-align: center;
 }
 
@@ -6,7 +7,11 @@ section {
     text-align: center;
 }
 
+nav {
+    text-align: center;
+}
 body {
+    height: 80%;
     background-color: grey;
 }
 
@@ -14,14 +19,17 @@ footer {
     text-align: right;
 }
 
-.recup_ok {
-    color:greenyellow
+/* test */
+.topfilmframe {
+    color: blue;
 }
 
+/* test */
 .in_progress {
     color: red;
 }
 
+/* test */
 .just_tests {
     color:green
 }
@@ -29,3 +37,17 @@ footer {
 sans point : balise
 avec un point : class
 */
+
+.containerTopFilm {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 60%;
+  }
+
+  .containerTopSeven {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 15%;
+  }
