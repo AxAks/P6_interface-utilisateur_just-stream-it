@@ -63,7 +63,6 @@ async function fetchTopFilmInfos(page_url){
 
 // affiche l'image pour un film, à faire en boucle pour les Top7
 async function displayFilmImage(page_url) {
-    //let filmPoster = document.querySelector('filmPoster');
     let filmInfos = await fetchTopFilmInfos(page_url)
     let filmPosterURL = await filmInfos.image_url;
     let response = await fetch(filmPosterURL);
@@ -71,9 +70,12 @@ async function displayFilmImage(page_url) {
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
     document.querySelector("#FilmPoster").src = FilmPosterUrl; // sortir l'id !
-    return filmPoster
 };
 
 async function displayFilmImagesForTopSeven(page_url) {
-    //let topFilmList = 
+    let topSevenInfosList = await fetchTopSevenFilmInfos(page_url);
+    console.log("HelloYall", topSevenInfosList);
+    let topSevenPosterURLList = [];
+    //for (filmInfos of topSevenInfosList) {
+
 }
