@@ -70,12 +70,17 @@ async function displayFilmImage(page_url) {
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
     document.querySelector("#FilmPoster").src = FilmPosterUrl; // sortir l'id !
+    // return filmPosterUrl //vraiment besoin d'une valeur de retour ?
 };
 
 async function displayFilmImagesForTopSeven(page_url) {
     let topSevenInfosList = await fetchTopSevenFilmInfos(page_url);
     console.log("HelloYall", topSevenInfosList);
     let topSevenPosterURLList = [];
-    //for (filmInfos of topSevenInfosList) {
-
+    let FilmPosterURL = filmInfos.image_url;
+    for (FilmPosterURL of topSevenInfosList) {
+        topSevenPosterURLList.push(FilmPosterURL);
+        console.log("HelloYall2", FilmPosterURL, topSevenPosterURLList);
+    };
+    console.log("HelloYall3", topSevenPosterURLList);
 }
