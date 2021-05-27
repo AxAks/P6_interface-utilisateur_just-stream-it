@@ -77,35 +77,3 @@ async function displayFilmImage(page_url) {
     document.querySelector("#FilmPoster").src = FilmPosterUrl;
     return filmPoster
 };
-
-/*
-    let reader = new FileReader(); // marche  pas !!! 
-    let FilmPosterAsDataURL = reader.readAsDataURL(objectURL);
-    console.log("hello4", FilmPosterAsDataURL); // undefined !!!
-    FilmPoster = await FilmPosterAsDataURL.result;
-    console.log("hello5", FilmPoster);
-    return FilmPoster
-}
-*/
-
-/*
-    const blobToImage = (FilmPosterBlob) => {
-        new Promise(resolve => {
-            const url = URL.createObjectURL(FilmPosterBlob)
-            let img = new Image()
-            img.onload = () => {
-                URL.revokeObjectURL(url)
-                resolve(img)
-            }
-            img.src = url
-            console.log("Hello4", img.src)
-            return img.src
-        })
-    }
-*/
-    //document.getElementById("filmPoster").innerHTML;
-
-    
-//    let objectURL = URL.createObjectURL(filmPoster);
-  //  let myImage = document.getElementById("my-img");
-    //myImage.src = objectURL;
