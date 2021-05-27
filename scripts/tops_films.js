@@ -63,39 +63,52 @@ async function fetchTopFilmInfos(page_url){
 
 
 async function displayFilmImage(page_url) {
+    let filmPoster = document.querySelector('filmPoster');
     let filmInfos = await fetchTopFilmInfos(page_url)
     let filmPosterURL = await filmInfos.image_url;
     console.log("hello", filmPosterURL);
     let response = await fetch(filmPosterURL);
     console.log("hello2", response);
     let FilmPosterBlob = await response.blob();
-    console.log("hello3", FilmPosterBlob);
+    console.log("hello3", FilmPosterBlob); // jusqu'ici tout va bien 
 
-    let reader = new FileReader();
+    let objectURL = URL.createObjectURL(FilmPosterBlob); // ca sert à quoi ?
+    console.log("hello4", objectURL);
+    
+    let reader = new FileReader(); // marche  pas !!! 
     let FilmPosterAsDataURL = reader.readAsDataURL(FilmPosterBlob);
+    console.log("hello5", FilmPosterAsDataURL); // undefined !!!
+    FilmPoster = await FilmPosterAsDataURL.result;
+    console.log("hello6", FilmPoster);
+
+    // filmPoster.src = objectURL;
+    // console.log("hello7", FilmPoster);
+    // console.log("hello8", FilmPosterBlob.src);
+    return filmPoster
+};
+
+/*
+    let reader = new FileReader(); // marche  pas !!! 
+    let FilmPosterAsDataURL = reader.readAsDataURL(objectURL);
     console.log("hello4", FilmPosterAsDataURL); // undefined !!!
     FilmPoster = await FilmPosterAsDataURL.result;
     console.log("hello5", FilmPoster);
     return FilmPoster
 }
+*/
 
 /*
-var reader = new FileReader();
-reader.readAsDataURL(blob); 
-reader.onloadend = function() {
-   base64data = reader.result;     
-}
-
-
-    const blobToImage = (FilmsPosterBlob) => {
-        return new Promise(resolve => {
-            const url = URL.createObjectURL(FilmsPosterBlob)
+    const blobToImage = (FilmPosterBlob) => {
+        new Promise(resolve => {
+            const url = URL.createObjectURL(FilmPosterBlob)
             let img = new Image()
             img.onload = () => {
                 URL.revokeObjectURL(url)
                 resolve(img)
             }
-          img.src = url
+            img.src = url
+            console.log("Hello4", img.src)
+            return img.src
         })
     }
 */
