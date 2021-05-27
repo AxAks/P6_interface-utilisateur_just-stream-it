@@ -72,18 +72,9 @@ async function displayFilmImage(page_url) {
     let FilmPosterBlob = await response.blob();
     console.log("hello3", FilmPosterBlob); // jusqu'ici tout va bien 
 
-    let objectURL = URL.createObjectURL(FilmPosterBlob); // ca sert à quoi ?
-    console.log("hello4", objectURL);
-    
-    let reader = new FileReader(); // marche  pas !!! 
-    let FilmPosterAsDataURL = reader.readAsDataURL(FilmPosterBlob);
-    console.log("hello5", FilmPosterAsDataURL); // undefined !!!
-    FilmPoster = await FilmPosterAsDataURL.result;
-    console.log("hello6", FilmPoster);
-
-    // filmPoster.src = objectURL;
-    // console.log("hello7", FilmPoster);
-    // console.log("hello8", FilmPosterBlob.src);
+    let urlCreator = window.URL || window.webkitURL;
+    let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
+    document.querySelector("#FilmPoster").src = FilmPosterUrl;
     return filmPoster
 };
 
