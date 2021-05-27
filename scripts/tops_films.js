@@ -66,12 +66,8 @@ async function displayFilmImage(page_url) {
     let filmPoster = document.querySelector('filmPoster');
     let filmInfos = await fetchTopFilmInfos(page_url)
     let filmPosterURL = await filmInfos.image_url;
-    console.log("hello", filmPosterURL);
     let response = await fetch(filmPosterURL);
-    console.log("hello2", response);
     let FilmPosterBlob = await response.blob();
-    console.log("hello3", FilmPosterBlob); // jusqu'ici tout va bien 
-
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
     document.querySelector("#FilmPoster").src = FilmPosterUrl;
