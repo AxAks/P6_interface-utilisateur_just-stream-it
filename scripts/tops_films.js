@@ -55,7 +55,6 @@ async function getFilmImageforTopTen(page_url) {
         let FilmPosterBlob = await response.blob()
         urlCreator = window.URL || window.webkitURL
         FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob)
-        console.log(FilmPosterUrl)
         document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl
         TopTenPosterURLs.push(FilmPosterUrl)
         index++
@@ -64,6 +63,7 @@ async function getFilmImageforTopTen(page_url) {
 
 
 
+ 
 
 
 
