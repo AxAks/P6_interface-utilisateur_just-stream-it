@@ -26,26 +26,63 @@ async function fetchTopTenFilmsURLs(page_url){
 // recuperation des infos des films en bouclant dans la liste des URL du top10
 async function fetchFilmInfosforTopTen(page_url){
     let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopTenFilmInfos = [];
+    let TopTenFilmAllInfos = [];
     for (FilmURL of TopTenFilmURLs) {
         response = await fetch(FilmURL);
-        FilmInfos = await response.json();
-        TopTenFilmInfos.push(FilmInfos);
+        FilmAllInfos = await response.json();
+        TopTenFilmAllInfos.push(FilmAllInfos);
     };
-    return TopTenFilmInfos
+    console.log(TopTenFilmAllInfos);
+    index = 0
+    for (TopTenFilm of TopTenFilmAllInfos) {
+    document.querySelector(`p${index}`).innerHTML =  
+    `"Title: ${await TopTenFilmAllInfos[index].original_title}"<br>
+        - Description: ${await TopTenFilmAllInfos[index].description}<br>
+        - Genres: ${await TopTenFilmAllInfos[index].genres}<br>
+        - Duration: ${await TopTenFilmAllInfos[index].duration} Minutes<br>
+        - Date published: ${await TopTenFilmAllInfos[index].date_published}<br>`;
+        await sleep(400);
+        index++
+    }
+    return TopTenFilmAllInfos
 };
 
+/*
+1/  la photo du film
+    titre original 
+    (un bouton) 
+    le résumé du film
+
+1bis/
+    la photo du film
+    titre original 
+    le résumé du film
+
+
+2/  L’image de la pochette du film
+    Le Titre du film
+    Le genre complet du film
+    Sa date de sortie
+    Son Rated
+    Son score Imdb
+    Son réalisateur
+    La liste des acteurs
+    Sa durée
+    Le pays d’origine
+    Le résultat au Box Office
+    Le résumé du film
+*/
 
 //recupérer l'image pour les films d'un TOP 10 
 async function getFilmImageforTopTen(page_url) {
     let TopTenFilmInfos = await fetchFilmInfosforTopTen(page_url);
-        if (page_url == BEST_OF_ALL)
+        if (page_url === BEST_OF_ALL)
         page_url_str = "BEST_OF_ALL";
-    else if (page_url == BEST_ACTION)
+    else if (page_url === BEST_ACTION)
         page_url_str = "BEST_ACTION";
-    else if (page_url == BEST_DRAMA)
+    else if (page_url === BEST_DRAMA)
         page_url_str = "BEST_DRAMA";
-    else if (page_url == BEST_FAMILY)
+    else if (page_url === BEST_FAMILY)
         page_url_str = "BEST_FAMILY";
 
     index = 0; 
@@ -53,16 +90,20 @@ async function getFilmImageforTopTen(page_url) {
     for (FilmInfos of TopTenFilmInfos) {
         let response = await fetch(FilmInfos.image_url);
         let FilmPosterBlob = await response.blob()
-        urlCreator = window.URL || window.webkitURL
-        FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob)
+        urlCreator = window.URL || window.webkitURL;
+        FilmPosterUrl = await urlCreator.createObjectURL(FilmPosterBlob);
+        console.log("FilmPosterUrls: ", FilmPosterUrl);
         document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl
         TopTenPosterURLs.push(FilmPosterUrl)
+        await sleep(400);
         index++
     };
 };
 
 
-
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
  
 
 
@@ -139,4 +180,3 @@ async function fetchTopTenFilmInfos(page_url){
     };
     return topTenFilmsInfos
 };
-

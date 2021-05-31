@@ -14,57 +14,51 @@
 
     <main>
     <section class= "containerTopFilm">
-        <p> Le Meilleur Film: (mettre le titre du film)</p>
-        <img id="BEST_OF_ALL_0">
+        <p0>
+
+        </p0>
+        <img id=BEST_OF_ALL_0>
     </section>
     </main>
     <section class="containerTopSeven">
         <p>Les 7 Meilleurs Films Toute Catégorie:</p>
-        <section>
-        <img id="BEST_OF_ALL_1">
-        <img id="BEST_OF_ALL_2">
-        <img id="BEST_OF_ALL_3">
-        <img id="BEST_OF_ALL_4">
-        <img id="BEST_OF_ALL_5">
-        <img id="BEST_OF_ALL_6">
-        <img id="BEST_OF_ALL_7">
-        </section>
+        <p1>
+
+        </p1>
+        <img id=BEST_OF_ALL_1>
+        <p2>
+
+        </p2>
+        <img id=BEST_OF_ALL_2>
+        <p3>
+
+        </p3>
+        <img id=BEST_OF_ALL_3>
+        <p4>
+
+        </p4>
+        <img id=BEST_OF_ALL_4>
+        <p5>
+
+        </p5>
+        <img id=BEST_OF_ALL_5>
+        <p6>
+
+        </p6>
+        <img id=BEST_OF_ALL_6>
+        <p7>
+
+        </p7>
+        <img id=BEST_OF_ALL_7>
     </section>
     <section class="containerTopSeven">
         <p>Les 7 Meilleurs Films d'Action:</p>
-        <section>
-        <img id="BEST_ACTION_0">
-        <img id="BEST_ACTION_1">
-        <img id="BEST_ACTION_2">
-        <img id="BEST_ACTION_3">
-        <img id="BEST_ACTION_4">
-        <img id="BEST_ACTION_5">
-        <img id="BEST_ACTION_6">
-        </section>
     </section>
     <section class="containerTopSeven">
     <p>Les 7 Meileurs Films Familiaux:</p>
-        <section>
-        <img id="BEST_FAMILY_0">
-        <img id="BEST_FAMILY_1">
-        <img id="BEST_FAMILY_2">
-        <img id="BEST_FAMILY_3">
-        <img id="BEST_FAMILY_4">
-        <img id="BEST_FAMILY_5">
-        <img id="BEST_FAMILY_6">
-        </section>
     </section>
     <section class="containerTopSeven">
         <p>Les 7 Meilleurs Drames:</p>
-        <section>
-        <img id="BEST_DRAMA_0">
-        <img id="BEST_DRAMA_1">
-        <img id="BEST_DRAMA_2">
-        <img id="BEST_DRAMA_3">
-        <img id="BEST_DRAMA_4">
-        <img id="BEST_DRAMA_5">
-        <img id="BEST_DRAMA_6">
-        </section>
     </section>
     <footer>
         <p> Just Stream It ! </p>
@@ -73,10 +67,14 @@
 <script type="text/javascript" src="../scripts/tops_films.js"> <!-- Javascript Code // --> </script>
 <script> 
 document.addEventListener('DOMContentLoaded', () => {
-    getFilmImageforTopTen(BEST_OF_ALL);
-    getFilmImageforTopTen(BEST_ACTION);
-    getFilmImageforTopTen(BEST_FAMILY);
-    getFilmImageforTopTen(BEST_DRAMA);
+    TopTenAllGenresAllInfos = fetchFilmInfosforTopTen(BEST_OF_ALL);
+    /*TopTenActionAllInfos = fetchFilmInfosforTopTen(BEST_ACTION);
+    TopTenFamilyAllInfos = fetchFilmInfosforTopTen(BEST_FAMILY);
+    TopTenDramaAllInfos = fetchFilmInfosforTopTen(BEST_DRAMA);*/
+    TopTenAllGenresPosters = getFilmImageforTopTen(BEST_OF_ALL)
+    /*TopTenActionPosters = getFilmImageforTopTen(BEST_ACTION)
+    TopTenFamilyPosters = getFilmImageforTopTen(BEST_FAMILY)
+    TopTenDramaPosters = getFilmImageforTopTen(BEST_DRAMA)*/
     console.log("OK");
 });
 </script>
