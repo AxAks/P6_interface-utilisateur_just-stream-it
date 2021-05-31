@@ -15,20 +15,6 @@ async function fetchTopTenFilmsURLs(page_url){
     return allURLs;
 };
 
-// recuperation des infos d'un film via son index dans la list top10
-async function fetchFilmInfosbyIndex(page_url, index){
-    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopFilmUrl = await TopTenFilmURLs[index];
-    let response = await fetch(TopFilmUrl);
-    let filmInfos = await response.json();
-     /* console.log(
-        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
-        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
-        )*/
-    return filmInfos
-};
-
 // recuperation des infos des films en bouclant dans la liste des URL du top10
 async function fetchFilmInfosforTopTen(page_url){
     let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url)
@@ -70,6 +56,39 @@ async function getFilmImageforTopTen(page_url) {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// recuperation des infos d'un film via son index dans la list top10
+async function fetchFilmInfosbyIndex(page_url, index){
+    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
+    let TopFilmUrl = await TopTenFilmURLs[index];
+    let response = await fetch(TopFilmUrl);
+    let filmInfos = await response.json();
+     /* console.log(
+        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
+        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
+        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
+        )*/
+    return filmInfos
+};
+
+
 // affiche l'image pour un film via l'index
 async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
     let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
@@ -91,7 +110,6 @@ async function displayFilmImage(page_url, index) { // id = $constpage_url + $ind
     document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl; // sortir l'id !
     
 };
-
 
 
 
