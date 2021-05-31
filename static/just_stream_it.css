@@ -25,17 +25,15 @@ avec un point : class
 */
 
 .containerTopFilm {
-    outline-color: blue;
     position: relative;
     overflow: hidden;
     width: 100%;;
-    /*padding-top: 60%;*/
+    top: 60%;
   }
 
   .containerTopSeven {
-    outline-color: violet;
     position: relative;
     overflow: hidden;
     width: 100%;
-    /*padding-top: 15%;*/
+    top: 15%;
   }

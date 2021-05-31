@@ -6,51 +6,12 @@
     <link href="../static/just_stream_it.css" rel="stylesheet" media="all" type="text/css"> 
 </head>
 
-<header>
+<body>         
+    <header>
         <h1>Just Stream It !</h1>
         <h2>Interroger l'API</h2>
-</header>
+    </header>
 
-<body onload="
-            getFilmImageforTopTen(BEST_OF_ALL)
-            getFilmImageforTopTen(BEST_ACTION)
-            getFilmImageforTopTen(BEST_FAMILY)
-            getFilmImageforTopTen(BEST_DRAMA)
-            ">
-            <!--displayFilmImage(BEST_OF_ALL, 0)
-            displayFilmImage(BEST_OF_ALL, 1)
-            displayFilmImage(BEST_OF_ALL, 2)
-            displayFilmImage(BEST_OF_ALL, 3)
-            displayFilmImage(BEST_OF_ALL, 4)
-            displayFilmImage(BEST_OF_ALL, 5)
-            displayFilmImage(BEST_OF_ALL, 6)
-            displayFilmImage(BEST_OF_ALL, 7)
-            
-            displayFilmImage(BEST_ACTION, 0)
-            displayFilmImage(BEST_ACTION, 1)
-            displayFilmImage(BEST_ACTION, 2)
-            displayFilmImage(BEST_ACTION, 3)
-            displayFilmImage(BEST_ACTION, 4)
-            displayFilmImage(BEST_ACTION, 5)
-            displayFilmImage(BEST_ACTION, 6)
-
-            displayFilmImage(BEST_FAMILY, 0)
-            displayFilmImage(BEST_FAMILY, 1)
-            displayFilmImage(BEST_FAMILY, 2)
-            displayFilmImage(BEST_FAMILY, 3)
-            displayFilmImage(BEST_FAMILY, 4)
-            displayFilmImage(BEST_FAMILY, 5)
-            displayFilmImage(BEST_FAMILY, 6)
-
-            displayFilmImage(BEST_DRAMA, 0)
-            displayFilmImage(BEST_DRAMA, 1)
-            displayFilmImage(BEST_DRAMA, 2)
-            displayFilmImage(BEST_DRAMA, 3)
-            displayFilmImage(BEST_DRAMA, 4)
-            displayFilmImage(BEST_DRAMA, 5)
-            displayFilmImage(BEST_DRAMA, 6)-->
-         
-    
     <main>
     <section class= "containerTopFilm">
         <p> Le Meilleur Film: (mettre le titre du film)</p>
@@ -109,7 +70,15 @@
         <p> Just Stream It ! </p>
     </footer>
 
-<script type="text/javascript" src="../scripts/constants.js"> <!-- Javascript Code // --> </script>
 <script type="text/javascript" src="../scripts/tops_films.js"> <!-- Javascript Code // --> </script>
+<script> 
+document.addEventListener('DOMContentLoaded', () => {
+    getFilmImageforTopTen(BEST_OF_ALL);
+    getFilmImageforTopTen(BEST_ACTION);
+    getFilmImageforTopTen(BEST_FAMILY);
+    getFilmImageforTopTen(BEST_DRAMA);
+    console.log("OK");
+});
+</script>
 </body>
 </html>

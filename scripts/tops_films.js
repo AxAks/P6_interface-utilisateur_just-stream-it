@@ -1,3 +1,11 @@
+// CONSTANTS
+const MAIN = "http://localhost:8000/api/v1/titles/"
+const BEST_OF_ALL = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&sort_by=-votes"
+const BEST_ACTION = "http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes"
+const BEST_DRAMA = "http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score&sort_by=-votes"
+const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?genre=family&sort_by=-imdb_score&sort_by=-votes"
+
+
 // recuperation des urls des films les mieux notés sur 2 pages (10 films)
 async function fetchTopTenFilmsURLs(page_url){
     let allURLs = []; 
@@ -17,12 +25,11 @@ async function fetchTopTenFilmsURLs(page_url){
 
 // recuperation des infos des films en bouclant dans la liste des URL du top10
 async function fetchFilmInfosforTopTen(page_url){
-    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url)
-    let TopTenFilmInfos = []
+    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
+    let TopTenFilmInfos = [];
     for (FilmURL of TopTenFilmURLs) {
         response = await fetch(FilmURL);
         FilmInfos = await response.json();
-        //console.log(FilmInfos);
         TopTenFilmInfos.push(FilmInfos);
     };
     return TopTenFilmInfos
@@ -33,26 +40,26 @@ async function fetchFilmInfosforTopTen(page_url){
 async function getFilmImageforTopTen(page_url) {
     let TopTenFilmInfos = await fetchFilmInfosforTopTen(page_url);
         if (page_url == BEST_OF_ALL)
-        page_url_str = "BEST_OF_ALL"
+        page_url_str = "BEST_OF_ALL";
     else if (page_url == BEST_ACTION)
-        page_url_str = "BEST_ACTION"
+        page_url_str = "BEST_ACTION";
     else if (page_url == BEST_DRAMA)
-        page_url_str = "BEST_DRAMA"
+        page_url_str = "BEST_DRAMA";
     else if (page_url == BEST_FAMILY)
-        page_url_str = "BEST_FAMILY"
+        page_url_str = "BEST_FAMILY";
 
     index = 0; 
     TopTenPosterURLs = []
     for (FilmInfos of TopTenFilmInfos) {
         let response = await fetch(FilmInfos.image_url);
-        let FilmPosterBlob = await response.blob();
-        let urlCreator = window.URL || window.webkitURL;
-        let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-        document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl;
+        let FilmPosterBlob = await response.blob()
+        urlCreator = window.URL || window.webkitURL
+        FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob)
+        console.log(FilmPosterUrl)
+        document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl
         TopTenPosterURLs.push(FilmPosterUrl)
         index++
     };
-    return TopTenPosterURLs
 };
 
 
@@ -107,7 +114,7 @@ async function displayFilmImage(page_url, index) { // id = $constpage_url + $ind
     let FilmPosterBlob = await response.blob();
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl; // sortir l'id !
+    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl;
     
 };
 
