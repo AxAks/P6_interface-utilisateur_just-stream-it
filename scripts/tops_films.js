@@ -15,25 +15,13 @@ async function fetchTopTenFilmsURLs(page_url){
     return allURLs;
 };
 
-// recuperation des urls des 7 meilleurs films
-async function fetchTopSevenFilmsURLs(page_url){
-    let pagesFilmsURLs = await fetchTopTenFilmsURLs(page_url); 
-    let firstSevenFilmsURLs = [];
-    i = 0;
-    while (firstSevenFilmsURLs.length < 7) {
-        firstSevenFilmsURLs.push(pagesFilmsURLs[i]);
-        i++; 
-    };
-    return firstSevenFilmsURLs;
-}
-
-// recuperation des infos de 7 meilleurs films
-async function fetchTopSevenFilmInfos(page_url){
-    let topSevenFilmsURLs = await fetchTopSevenFilmsURLs(page_url);
+// recuperation des infos de 10 meilleurs films
+async function fetchTopTenFilmInfos(page_url){
+    let topTenFilmsURLs = await fetchTopTenFilmsURLs(page_url);
     topSevenFilmsInfos = [];
     i = 0;
-    while(topSevenFilmsInfos.length < 7) {
-        response = await fetch (topSevenFilmsURLs[i]);
+    while(topSevenFilmsInfos.length < 10) {
+        response = await fetch (topTenFilmsURLs[i]);
         filmInfos = await response.json();
         topSevenFilmsInfos.push(filmInfos);
         i++;
@@ -44,13 +32,13 @@ async function fetchTopSevenFilmInfos(page_url){
         filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
         )
     };
-    return topSevenFilmsInfos
+    return topTenFilmsInfos
 };
 
 // recuperation des infos du meilleur film
-async function fetchTopFilmInfos(page_url){
+async function fetchFilmInfosbyIndex(page_url, index){
     let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopFilmUrl = TopTenFilmURLs[0];
+    let TopFilmUrl = await TopTenFilmURLs[index];
     let response = await fetch(TopFilmUrl);
     let filmInfos = await response.json();
     console.log(
@@ -62,25 +50,25 @@ async function fetchTopFilmInfos(page_url){
 };
 
 // affiche l'image pour un film, à faire en boucle pour les Top7
-async function displayFilmImage(page_url) {
-    let filmInfos = await fetchTopFilmInfos(page_url)
+async function displayFilmImage(page_url, index) {
+    let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
     let filmPosterURL = await filmInfos.image_url;
     let response = await fetch(filmPosterURL);
     let FilmPosterBlob = await response.blob();
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-    document.querySelector("#FilmPoster").src = FilmPosterUrl; // sortir l'id !
+    document.querySelector(`#FilmPoster_${index}`).src = FilmPosterUrl; // sortir l'id !
     // return filmPosterUrl //vraiment besoin d'une valeur de retour ?
 };
 
-async function displayFilmImagesForTopSeven(page_url) {
-    let topSevenInfosList = await fetchTopSevenFilmInfos(page_url);
+async function displayFilmImagesForTopTen(page_url) {
+    let topTenInfosList = await fetchTopTenFilmInfos(page_url);
     console.log("HelloYall", topSevenInfosList);
-    let topSevenPosterURLList = [];
+    let topTenPosterURLList = [];
     let FilmPosterURL = filmInfos.image_url;
-    for (FilmPosterURL of topSevenInfosList) {
-        topSevenPosterURLList.push(FilmPosterURL);
-        console.log("HelloYall2", FilmPosterURL, topSevenPosterURLList);
+    for (FilmPosterURL of topTenInfosList) {
+        topTenPosterURLList.push(FilmPosterURL);
+        console.log("HelloYall2", FilmPosterURL, topTenPosterURLList);
     };
-    console.log("HelloYall3", topSevenPosterURLList);
+    console.log("HelloYall3", topTenPosterURLList);
 }
