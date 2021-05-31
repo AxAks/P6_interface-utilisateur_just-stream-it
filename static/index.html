@@ -12,7 +12,12 @@
 </header>
 
 <body onload="
-            displayFilmImage(BEST_OF_ALL, 0)
+            getFilmImageforTopTen(BEST_OF_ALL)
+            getFilmImageforTopTen(BEST_ACTION)
+            getFilmImageforTopTen(BEST_FAMILY)
+            getFilmImageforTopTen(BEST_DRAMA)
+            ">
+            <!--displayFilmImage(BEST_OF_ALL, 0)
             displayFilmImage(BEST_OF_ALL, 1)
             displayFilmImage(BEST_OF_ALL, 2)
             displayFilmImage(BEST_OF_ALL, 3)
@@ -43,8 +48,8 @@
             displayFilmImage(BEST_DRAMA, 3)
             displayFilmImage(BEST_DRAMA, 4)
             displayFilmImage(BEST_DRAMA, 5)
-            displayFilmImage(BEST_DRAMA, 6)"> 
-        <!-- -->
+            displayFilmImage(BEST_DRAMA, 6)-->
+         
     
     <main>
     <section class= "containerTopFilm">
@@ -55,13 +60,14 @@
     <section class="containerTopSeven">
         <p>Les 7 Meilleurs Films Toute Catégorie:</p>
 
-        <img id="BEST_OF_ALL_1">
+        <section><img id="BEST_OF_ALL_1">
         <img id="BEST_OF_ALL_2">
         <img id="BEST_OF_ALL_3">
         <img id="BEST_OF_ALL_4">
         <img id="BEST_OF_ALL_5">
         <img id="BEST_OF_ALL_6">
         <img id="BEST_OF_ALL_7">
+        </section>
     </section>
     <section class="containerTopSeven">
         <p>Les 7 Meilleurs Films d'Action:</p>

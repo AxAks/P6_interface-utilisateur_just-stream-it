@@ -15,6 +15,86 @@ async function fetchTopTenFilmsURLs(page_url){
     return allURLs;
 };
 
+// recuperation des infos d'un film via son index dans la list top10
+async function fetchFilmInfosbyIndex(page_url, index){
+    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
+    let TopFilmUrl = await TopTenFilmURLs[index];
+    let response = await fetch(TopFilmUrl);
+    let filmInfos = await response.json();
+     /* console.log(
+        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
+        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
+        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
+        )*/
+    return filmInfos
+};
+
+// recuperation des infos des films en bouclant dans la liste des URL du top10
+async function fetchFilmInfosforTopTen(page_url){
+    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url)
+    let TopTenFilmInfos = []
+    for (FilmURL of TopTenFilmURLs) {
+        response = await fetch(FilmURL);
+        FilmInfos = await response.json();
+        //console.log(FilmInfos);
+        TopTenFilmInfos.push(FilmInfos);
+    };
+    return TopTenFilmInfos
+};
+
+
+//recupérer l'image pour les films d'un TOP 10 
+async function getFilmImageforTopTen(page_url) {
+    let TopTenFilmInfos = await fetchFilmInfosforTopTen(page_url);
+        if (page_url == BEST_OF_ALL)
+        page_url_str = "BEST_OF_ALL"
+    else if (page_url == BEST_ACTION)
+        page_url_str = "BEST_ACTION"
+    else if (page_url == BEST_DRAMA)
+        page_url_str = "BEST_DRAMA"
+    else if (page_url == BEST_FAMILY)
+        page_url_str = "BEST_FAMILY"
+
+    index = 0; 
+    TopTenPosterURLs = []
+    for (FilmInfos of TopTenFilmInfos) {
+        let response = await fetch(FilmInfos.image_url);
+        let FilmPosterBlob = await response.blob();
+        let urlCreator = window.URL || window.webkitURL;
+        let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
+        document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl;
+        TopTenPosterURLs.push(FilmPosterUrl)
+        index++
+    };
+    return TopTenPosterURLs
+};
+
+
+// affiche l'image pour un film via l'index
+async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
+    let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
+
+        if (page_url == BEST_OF_ALL)
+        page_url_str = "BEST_OF_ALL"
+    else if (page_url == BEST_ACTION)
+        page_url_str = "BEST_ACTION"
+    else if (page_url == BEST_DRAMA)
+        page_url_str = "BEST_DRAMA"
+    else if (page_url == BEST_FAMILY)
+        page_url_str = "BEST_FAMILY"
+
+    let filmPosterURL = await filmInfos.image_url;
+    let response = await fetch(filmPosterURL);
+    let FilmPosterBlob = await response.blob();
+    let urlCreator = window.URL || window.webkitURL;
+    let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
+    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl; // sortir l'id !
+    
+};
+
+
+
+
 // recuperation des infos de 10 meilleurs films
 async function fetchTopTenFilmInfos(page_url){
     let topTenFilmsURLs = await fetchTopTenFilmsURLs(page_url);
@@ -35,38 +115,3 @@ async function fetchTopTenFilmInfos(page_url){
     return topTenFilmsInfos
 };
 
-// recuperation des infos d'un film via son index dans la list top10
-async function fetchFilmInfosbyIndex(page_url, index){
-    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopFilmUrl = await TopTenFilmURLs[index];
-    let response = await fetch(TopFilmUrl);
-    let filmInfos = await response.json();
-    console.log(
-        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
-        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
-        )
-    return filmInfos
-};
-
-// affiche l'image pour un film, à faire en boucle pour les Top7
-async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
-    let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
-
-        if (page_url == BEST_OF_ALL)
-        page_url_str = "BEST_OF_ALL"
-    else if (page_url == BEST_ACTION)
-        page_url_str = "BEST_ACTION"
-    else if (page_url == BEST_DRAMA)
-        page_url_str = "BEST_DRAMA"
-    else if (page_url == BEST_FAMILY)
-        page_url_str = "BEST_FAMILY"
-
-    let filmPosterURL = await filmInfos.image_url;
-    let response = await fetch(filmPosterURL);
-    let FilmPosterBlob = await response.blob();
-    let urlCreator = window.URL || window.webkitURL;
-    let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl; // sortir l'id !
-    // return filmPosterUrl //vraiment besoin d'une valeur de retour ?
-};
