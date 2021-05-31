@@ -3,13 +3,13 @@
 */
 
 // CONSTANTS
-const MAIN_ENDPOINT = 'http://localhost:8000/api/v1/titles/'
-const BEST_OF_ALL_ENDPOINT = 'http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&sort_by=-votes'
-const BEST_ACTION_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes'
-const BEST_DRAMA_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score&sort_by=-votes'
-const BEST_FAMILY_ENDPOIND = 'http://localhost:8000/api/v1/titles/?genre=family&sort_by=-imdb_score&sort_by=-votes'
-// plus utilisé tests ! const GENRES_ENDPOINT = 'http://localhost:8000/api/v1/genres/'
-// plus utilisé tests ! const TEST_DETAILED_TITLE_ENDPOINT = 'http://localhost:8000/api/v1/titles/11207902'
+const MAIN = "http://localhost:8000/api/v1/titles/"
+const BEST_OF_ALL = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&sort_by=-votes"
+const BEST_ACTION = "http://localhost:8000/api/v1/titles/?genre=action&sort_by=-imdb_score&sort_by=-votes"
+const BEST_DRAMA = "http://localhost:8000/api/v1/titles/?genre=drama&sort_by=-imdb_score&sort_by=-votes"
+const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?genre=family&sort_by=-imdb_score&sort_by=-votes"
+// plus utilisé tests ! const GENRES_ENDPOINT = "http://localhost:8000/api/v1/genres/"
+// plus utilisé tests ! const TEST_DETAILED_TITLE_ENDPOINT = "http://localhost:8000/api/v1/titles/11207902"
 
 
 // consigne !!

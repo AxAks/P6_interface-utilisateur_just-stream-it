@@ -35,7 +35,7 @@ async function fetchTopTenFilmInfos(page_url){
     return topTenFilmsInfos
 };
 
-// recuperation des infos du meilleur film
+// recuperation des infos d'un film via son index dans la list top10
 async function fetchFilmInfosbyIndex(page_url, index){
     let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
     let TopFilmUrl = await TopTenFilmURLs[index];
@@ -50,25 +50,23 @@ async function fetchFilmInfosbyIndex(page_url, index){
 };
 
 // affiche l'image pour un film, à faire en boucle pour les Top7
-async function displayFilmImage(page_url, index) {
+async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
     let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
+
+        if (page_url == BEST_OF_ALL)
+        page_url_str = "BEST_OF_ALL"
+    else if (page_url == BEST_ACTION)
+        page_url_str = "BEST_ACTION"
+    else if (page_url == BEST_DRAMA)
+        page_url_str = "BEST_DRAMA"
+    else if (page_url == BEST_FAMILY)
+        page_url_str = "BEST_FAMILY"
+
     let filmPosterURL = await filmInfos.image_url;
     let response = await fetch(filmPosterURL);
     let FilmPosterBlob = await response.blob();
     let urlCreator = window.URL || window.webkitURL;
     let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-    document.querySelector(`#FilmPoster_${index}`).src = FilmPosterUrl; // sortir l'id !
+    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl; // sortir l'id !
     // return filmPosterUrl //vraiment besoin d'une valeur de retour ?
 };
-
-async function displayFilmImagesForTopTen(page_url) {
-    let topTenInfosList = await fetchTopTenFilmInfos(page_url);
-    console.log("HelloYall", topSevenInfosList);
-    let topTenPosterURLList = [];
-    let FilmPosterURL = filmInfos.image_url;
-    for (FilmPosterURL of topTenInfosList) {
-        topTenPosterURLList.push(FilmPosterURL);
-        console.log("HelloYall2", FilmPosterURL, topTenPosterURLList);
-    };
-    console.log("HelloYall3", topTenPosterURLList);
-}
