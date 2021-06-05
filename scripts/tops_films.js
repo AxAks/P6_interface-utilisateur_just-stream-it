@@ -35,136 +35,45 @@ async function fetchFilmInfosforTopTen(films_urls){
 };
 
 
-/*
-//recupérer l'image pour les films d'un TOP 10  ( pas utile !!)
-async function getFilmImageforTopTen(page_url) {
-    let TopTenFilmInfos = await fetchFilmInfosforTopTen(page_url);
-
-    TopTenPosterURLs = []
-    for (FilmInfos of TopTenFilmInfos) {
-        
-        let response = await fetch(FilmInfos.image_url);
-        console.log(FilmInfos)
-        let FilmPosterBlob = await response.blob()
-        console.log(FilmPosterBlob)
-        urlCreator = window.URL || window.webkitURL
-        FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob)
-        console.log(FilmPosterUrl)
-        TopTenPosterURLs.push(FilmPosterUrl)
-    };
-    return TopTenPosterURLs
-};
-*/
 
 
 document.addEventListener('DOMContentLoaded', async () => {
     let top_of_all_urls = await fetchTopTenFilmsURLs(BEST_OF_ALL);
     let films_infos = await fetchFilmInfosforTopTen(top_of_all_urls);
-    films_infos.forEach((FilmInfos, index) => {
+    films_infos.forEach((film_infos, index) => {
         console.log("index =", index);
-        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
-        console.log(FilmInfos);
-        document.querySelector(`#BEST_OF_ALL_${index}`).src = FilmInfos.image_url;
+        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
+        console.log(film_infos);
+        document.querySelector(`#BEST_OF_ALL_${index}`).src = film_infos.image_url; // is tjrs OK !!
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
     let top_action_urls = await fetchTopTenFilmsURLs(BEST_ACTION);
     let films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
-    films_infos.forEach((FilmInfos, index) => {
+    films_infos.forEach((film_infos, index) => {
         console.log("index =", index);
-        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
-        console.log(FilmInfos);
-        document.querySelector(`#BEST_ACTION${index}`).src = FilmInfos.image_url;
+        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
+        console.log(film_infos);
+        document.querySelector(`#BEST_ACTION_${index}`).src = film_infos.image_url; // is null !!
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
     let top_family_urls = await fetchTopTenFilmsURLs(BEST_FAMILY);
     let films_infos = await fetchFilmInfosforTopTen(top_family_urls);
-    films_infos.forEach((FilmInfos, index) => {
+    films_infos.forEach((film_infos, index) => {
         console.log("index =", index);
-        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
-        console.log(FilmInfos);
-        document.querySelector(`#BEST_FAMILY${index}`).src = FilmInfos.image_url
+        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
+        console.log(film_infos);
+        document.querySelector(`#BEST_FAMILY_${index}`).src = film_infos.image_url // is null !!
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
     let top_drama_urls = await fetchTopTenFilmsURLs(BEST_DRAMA);
     let films_infos = await fetchFilmInfosforTopTen(top_drama_urls);
-    films_infos.forEach((FilmInfos, index) => {
+    films_infos.forEach((film_infos, index) => {
         console.log("index =", index);
-        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
-        console.log(FilmInfos);
-        document.querySelector(`#BEST_DRAMA${index}`).src = FilmInfos.image_url
+        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
+        console.log(film_infos);
+        document.querySelector(`#BEST_DRAMA_${index}`).src = film_infos.image_url // is null !!
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-// recuperation des infos d'un film via son index dans la list top10
-async function fetchFilmInfosbyIndex(page_url, index){
-    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopFilmUrl = await TopTenFilmURLs[index];
-    let response = await fetch(TopFilmUrl);
-    let filmInfos = await response.json();
-     /* console.log(
-        filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
-        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
-    return filmInfos
-};
-
-// affiche l'image pour un film via l'index
-async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
-    let filmInfos = await fetchFilmInfosbyIndex(page_url, index)
-
-        if (page_url == BEST_OF_ALL)
-        page_url_str = "BEST_OF_ALL"
-    else if (page_url == BEST_ACTION)
-        page_url_str = "BEST_ACTION"
-    else if (page_url == BEST_DRAMA)
-        page_url_str = "BEST_DRAMA"
-    else if (page_url == BEST_FAMILY)
-        page_url_str = "BEST_FAMILY"
-
-    let filmPosterURL = await filmInfos.image_url;
-    let response = await fetch(filmPosterURL);
-    let FilmPosterBlob = await response.blob();
-    let urlCreator = window.URL || window.webkitURL;
-    let FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob);
-    document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl;
-    
-};
-
-
-
-// recuperation des infos de 10 meilleurs films
-async function fetchTopTenFilmInfos(page_url){
-    let topTenFilmsURLs = await fetchTopTenFilmsURLs(page_url);
-    topSevenFilmsInfos = [];
-    i = 0;
-    while(topSevenFilmsInfos.length < 10) {
-        response = await fetch (topTenFilmsURLs[i]);
-        filmInfos = await response.json();
-        topSevenFilmsInfos.push(filmInfos);
-        i++;
-    };
-    for (filmInfos of topSevenFilmsInfos) {  //toutes les infos à recupérer !!   
-        console.log(filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
-        filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
-        filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
-        )
-    };
-    return topTenFilmsInfos
-};
-*/
