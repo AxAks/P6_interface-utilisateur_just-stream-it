@@ -36,7 +36,7 @@ async function fetchFilmInfosforTopTen(films_urls){
 
 
 
-
+// Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
     let top_of_all_urls = await fetchTopTenFilmsURLs(BEST_OF_ALL);
     let films_infos = await fetchFilmInfosforTopTen(top_of_all_urls);
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_OF_ALL_${index}`).src = film_infos.image_url; // is tjrs OK !!
+        document.querySelector(`#BEST_OF_ALL_${index}`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_ACTION_${index}`).src = film_infos.image_url; // is null !!
+        document.querySelector(`#BEST_ACTION_${index}`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_FAMILY_${index}`).src = film_infos.image_url // is null !!
+        document.querySelector(`#BEST_FAMILY_${index}`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -74,6 +74,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_DRAMA_${index}`).src = film_infos.image_url // is null !!
+        document.querySelector(`#BEST_DRAMA_${index}`).src = film_infos.image_url;
     });
 });
