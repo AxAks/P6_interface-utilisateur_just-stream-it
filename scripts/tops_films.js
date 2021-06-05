@@ -8,62 +8,94 @@ const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?genre=family&sort_by=-
 
 // recuperation des urls des films les mieux notés sur 2 pages (10 films)
 async function fetchTopTenFilmsURLs(page_url){
-    let allURLs = []; 
+    let all_urls = []; 
     let page_nb = 1;
     let expected_pages = 2; // on peut changer le nombre de pages ici (5 resultats par page)
 
     while(page_nb <= expected_pages) {
-        let response = await fetch(page_url);
-        console.log("Statut page 1: " + response.status + " " + response.statusText);
+        let response =  await fetch(page_url);
+        console.log(`getting page ${page_nb} for ${page_url}`, response.statusText);
+        let data =  await response.json();
+        data.results.forEach(film => all_urls.push(film.url));
+        page_url =  await data.next;
         page_nb++;
-        let data = await response.json();
-        data.results.forEach(film => allURLs.push(film.url));
-        page_url = await data.next;
     };
-    return allURLs;
+    return all_urls;
 };
 
 // recuperation des infos des films en bouclant dans la liste des URL du top10
-async function fetchFilmInfosforTopTen(page_url){
-    let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
-    let TopTenFilmInfos = [];
-    for (FilmURL of TopTenFilmURLs) {
-        response = await fetch(FilmURL);
-        FilmInfos = await response.json();
-        TopTenFilmInfos.push(FilmInfos);
+async function fetchFilmInfosforTopTen(films_urls){
+    let top_ten_film_infos = [];
+    for (film_url of films_urls) {
+            response = await fetch(film_url);
+            film_infos = await response.json();
+            top_ten_film_infos.push(film_infos);
     };
-    return TopTenFilmInfos
+    return top_ten_film_infos;
 };
 
 
-//recupérer l'image pour les films d'un TOP 10 
+/*
+//recupérer l'image pour les films d'un TOP 10  ( pas utile !!)
 async function getFilmImageforTopTen(page_url) {
     let TopTenFilmInfos = await fetchFilmInfosforTopTen(page_url);
-        if (page_url == BEST_OF_ALL)
-        page_url_str = "BEST_OF_ALL";
-    else if (page_url == BEST_ACTION)
-        page_url_str = "BEST_ACTION";
-    else if (page_url == BEST_DRAMA)
-        page_url_str = "BEST_DRAMA";
-    else if (page_url == BEST_FAMILY)
-        page_url_str = "BEST_FAMILY";
 
-    index = 0; 
     TopTenPosterURLs = []
     for (FilmInfos of TopTenFilmInfos) {
+        
         let response = await fetch(FilmInfos.image_url);
+        console.log(FilmInfos)
         let FilmPosterBlob = await response.blob()
+        console.log(FilmPosterBlob)
         urlCreator = window.URL || window.webkitURL
         FilmPosterUrl = urlCreator.createObjectURL(FilmPosterBlob)
-        document.querySelector(`#${page_url_str}_${index}`).src = FilmPosterUrl
+        console.log(FilmPosterUrl)
         TopTenPosterURLs.push(FilmPosterUrl)
-        index++
     };
+    return TopTenPosterURLs
 };
+*/
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    let top_of_all_urls = await fetchTopTenFilmsURLs(BEST_OF_ALL);
+    let films_infos = await fetchFilmInfosforTopTen(top_of_all_urls);
+    films_infos.forEach((FilmInfos, index) => {
+        console.log("index =", index);
+        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
+        console.log(FilmInfos);
+        document.querySelector(`#BEST_OF_ALL_${index}`).src = FilmInfos.image_url;
+});
+    let top_action_urls = await fetchTopTenFilmsURLs(BEST_ACTION);
+    films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
+    films_infos.forEach((FilmInfos, index) => {
+        console.log("index =", index);
+        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
+        console.log(FilmInfos);
+        document.querySelectorAll(`#BEST_ACTION${index}`).src = FilmInfos.image_url;
+    });
+
+    top_family_urls = await fetchTopTenFilmsURLs(BEST_FAMILY);
+    films_infos = await fetchFilmInfosforTopTen(top_family_urls);
+    films_infos.forEach((FilmInfos, index) => {
+        console.log("index =", index);
+        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
+        console.log(FilmInfos);
+        //document.querySelector(`#BEST_FAMILY${index}`).src = FilmInfos.image_url
+    });
+
+    top_drama_urls = await fetchTopTenFilmsURLs(BEST_DRAMA);
+    films_infos = await fetchFilmInfosforTopTen(top_drama_urls);
+    films_infos.forEach((FilmInfos, index) => {
+        console.log("index =", index);
+        console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
+        console.log(FilmInfos);
+        //document.querySelector(`#BEST_DRAMA${index}`).src = FilmInfos.image_url
+    });
+});
 
 
 
- 
 
 
 
@@ -74,13 +106,7 @@ async function getFilmImageforTopTen(page_url) {
 
 
 
-
-
-
-
-
-
-
+/*
 // recuperation des infos d'un film via son index dans la list top10
 async function fetchFilmInfosbyIndex(page_url, index){
     let TopTenFilmURLs = await fetchTopTenFilmsURLs(page_url);
@@ -91,10 +117,8 @@ async function fetchFilmInfosbyIndex(page_url, index){
         filmInfos.id, filmInfos.title, filmInfos.original_title, filmInfos.image_url, filmInfos.genres, filmInfos.date_published,
         filmInfos.rated, filmInfos.imdb_score, filmInfos.directors, filmInfos.actors, filmInfos.duration,
         filmInfos.countries, filmInfos.worldwide_gross_income, filmInfos.description, filmInfos.long_description
-        )*/
     return filmInfos
 };
-
 
 // affiche l'image pour un film via l'index
 async function displayFilmImage(page_url, index) { // id = $constpage_url + $index
@@ -139,4 +163,4 @@ async function fetchTopTenFilmInfos(page_url){
     };
     return topTenFilmsInfos
 };
-
+*/
