@@ -65,32 +65,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
         console.log(FilmInfos);
         document.querySelector(`#BEST_OF_ALL_${index}`).src = FilmInfos.image_url;
+    });
 });
+document.addEventListener('DOMContentLoaded', async () => {
     let top_action_urls = await fetchTopTenFilmsURLs(BEST_ACTION);
-    films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
+    let films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
     films_infos.forEach((FilmInfos, index) => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
         console.log(FilmInfos);
-        document.querySelectorAll(`#BEST_ACTION${index}`).src = FilmInfos.image_url;
+        document.querySelector(`#BEST_ACTION${index}`).src = FilmInfos.image_url;
     });
-
-    top_family_urls = await fetchTopTenFilmsURLs(BEST_FAMILY);
-    films_infos = await fetchFilmInfosforTopTen(top_family_urls);
+});
+document.addEventListener('DOMContentLoaded', async () => {
+    let top_family_urls = await fetchTopTenFilmsURLs(BEST_FAMILY);
+    let films_infos = await fetchFilmInfosforTopTen(top_family_urls);
     films_infos.forEach((FilmInfos, index) => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
         console.log(FilmInfos);
-        //document.querySelector(`#BEST_FAMILY${index}`).src = FilmInfos.image_url
+        document.querySelector(`#BEST_FAMILY${index}`).src = FilmInfos.image_url
     });
-
-    top_drama_urls = await fetchTopTenFilmsURLs(BEST_DRAMA);
-    films_infos = await fetchFilmInfosforTopTen(top_drama_urls);
+});
+document.addEventListener('DOMContentLoaded', async () => {
+    let top_drama_urls = await fetchTopTenFilmsURLs(BEST_DRAMA);
+    let films_infos = await fetchFilmInfosforTopTen(top_drama_urls);
     films_infos.forEach((FilmInfos, index) => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${FilmInfos.original_title}`, response.statusText);
         console.log(FilmInfos);
-        //document.querySelector(`#BEST_DRAMA${index}`).src = FilmInfos.image_url
+        document.querySelector(`#BEST_DRAMA${index}`).src = FilmInfos.image_url
     });
 });
 
