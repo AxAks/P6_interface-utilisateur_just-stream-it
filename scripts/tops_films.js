@@ -46,7 +46,7 @@ async function setPosterSelectors(endpoint_url) {
     }
     else if (endpoint_url == BEST_DRAMA) {
         tag_base = 'BEST_DRAMA_POSTER'
-    };
+    }
  
     let urls = await fetchTopTenFilmsURLs(endpoint_url);
     let films_infos = await fetchFilmInfosforTopTen(urls);
@@ -59,7 +59,7 @@ async function setPosterSelectors(endpoint_url) {
 };
 
 
-// Chargement  au démarrage, à simplifier ?
+// Chargement  au démarrage, simplifié mais marche pas ...
 document.addEventListener('DOMContentLoaded', async () => {
     await setPosterSelectors(BEST_OF_ALL);
     await setPosterSelectors(BEST_ACTION);
