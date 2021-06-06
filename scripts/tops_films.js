@@ -34,46 +34,35 @@ async function fetchFilmInfosforTopTen(films_urls){
     return top_ten_film_infos;
 };
 
+async function setPosterSelectors(endpoint_url) {
+    if (endpoint_url == BEST_OF_ALL) {
+        tag_base = 'BEST_OF_ALL_POSTER'
+    }
+    else if (endpoint_url == BEST_ACTION) {
+        tag_base = 'BEST_ACTION_POSTER'
+    }
+    else if (endpoint_url == BEST_FAMILY) {
+        tag_base = 'BEST_FAMILY_POSTER'
+    }
+    else if (endpoint_url == BEST_DRAMA) {
+        tag_base = 'BEST_DRAMA_POSTER'
+    };
+ 
+    let urls = await fetchTopTenFilmsURLs(endpoint_url);
+    let films_infos = await fetchFilmInfosforTopTen(urls);
+    films_infos.forEach((film_infos, index) => {
+        document.querySelector(`#${tag_base}_${index}`).src = film_infos.image_url;
+        console.log("index =", index);
+        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
+        console.log(film_infos);
+    });
+};
 
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
-    let top_of_all_urls = await fetchTopTenFilmsURLs(BEST_OF_ALL);
-    let films_infos = await fetchFilmInfosforTopTen(top_of_all_urls);
-    films_infos.forEach((film_infos, index) => {
-        console.log("index =", index);
-        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
-        console.log(film_infos);
-        document.querySelector(`#BEST_OF_ALL_${index}`).src = film_infos.image_url;
-    });
-});
-document.addEventListener('DOMContentLoaded', async () => {
-    let top_action_urls = await fetchTopTenFilmsURLs(BEST_ACTION);
-    let films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
-    films_infos.forEach((film_infos, index) => {
-        console.log("index =", index);
-        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
-        console.log(film_infos);
-        document.querySelector(`#BEST_ACTION_${index}`).src = film_infos.image_url;
-    });
-});
-document.addEventListener('DOMContentLoaded', async () => {
-    let top_family_urls = await fetchTopTenFilmsURLs(BEST_FAMILY);
-    let films_infos = await fetchFilmInfosforTopTen(top_family_urls);
-    films_infos.forEach((film_infos, index) => {
-        console.log("index =", index);
-        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
-        console.log(film_infos);
-        document.querySelector(`#BEST_FAMILY_${index}`).src = film_infos.image_url;
-    });
-});
-document.addEventListener('DOMContentLoaded', async () => {
-    let top_drama_urls = await fetchTopTenFilmsURLs(BEST_DRAMA);
-    let films_infos = await fetchFilmInfosforTopTen(top_drama_urls);
-    films_infos.forEach((film_infos, index) => {
-        console.log("index =", index);
-        console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
-        console.log(film_infos);
-        document.querySelector(`#BEST_DRAMA_${index}`).src = film_infos.image_url;
-    });
+    await setPosterSelectors(BEST_OF_ALL);
+    await setPosterSelectors(BEST_ACTION);
+    await setPosterSelectors(BEST_FAMILY);
+    await setPosterSelectors(BEST_DRAMA);
 });
