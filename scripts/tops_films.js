@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
         document.querySelector(`#BEST_FAMILY_${index}_POSTER`).src = film_infos.image_url;
-        //document.getElementById   (pour refacto)
+        //document.createElement  (pour refacto)
         document.querySelector(`#BEST_FAMILY_${index}_TITLE`).innerHTML = film_infos.original_title;
         document.querySelector(`#BEST_FAMILY_${index}_DESCR`).innerHTML = film_infos.description;
         document.querySelector(`#BEST_FAMILY_${index}_GENRES`).innerHTML = film_infos.genres;
