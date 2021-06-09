@@ -35,6 +35,24 @@ async function fetchFilmInfosforTopTen(films_urls){
 };
 
 
+/* exemple querySelector + createElement
+showCharacters = characters => {
+    const charactersDiv = document.querySelector(‘#rick-and-morty-characters’);
+    characters.forEach(character => {
+        const characterElement = document.createElement(‘p’);
+        characterElement.innerText = `Character Name: ${character.name}`;
+        charactersDiv.append(characterElement);
+    });}
+
+=> premiere ebauche d'utilisation
+showFilms = films => {
+    const filmsDiv = document.querySelector(‘#films’);
+    films.forEach(film => {
+        const filmElement = document.createElement(‘p’);
+        filmElement.innerText = `Film Title: ${film.original_title}`;
+        filmsDiv.append(filmElement);
+    });}
+*/
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
@@ -46,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(film_infos);
         document.querySelector(`#BEST_OF_ALL_${index}_POSTER`).src = film_infos.image_url;
         document.querySelector(`#BEST_OF_ALL_${index}_TITLE`).innerHTML = film_infos.original_title;
+        //document.createElement  (pour refacto)
         document.querySelector(`#BEST_OF_ALL_${index}_DESCR`).innerHTML = film_infos.description;
         document.querySelector(`#BEST_OF_ALL_${index}_GENRES`).innerHTML = film_infos.genres;
         document.querySelector(`#BEST_OF_ALL_${index}_DURATION`).innerHTML = film_infos.duration;
@@ -89,7 +108,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
         document.querySelector(`#BEST_FAMILY_${index}_POSTER`).src = film_infos.image_url;
-        //document.createElement  (pour refacto)
         document.querySelector(`#BEST_FAMILY_${index}_TITLE`).innerHTML = film_infos.original_title;
         document.querySelector(`#BEST_FAMILY_${index}_DESCR`).innerHTML = film_infos.description;
         document.querySelector(`#BEST_FAMILY_${index}_GENRES`).innerHTML = film_infos.genres;
