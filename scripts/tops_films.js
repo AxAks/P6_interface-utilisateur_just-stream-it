@@ -72,6 +72,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector(`#BEST_ACTION_${index}_GENRES`).innerHTML = film_infos.genres;
         document.querySelector(`#BEST_ACTION_${index}_DURATION`).innerHTML = film_infos.duration;
         document.querySelector(`#BEST_ACTION_${index}_RELEASEDATE`).innerHTML = film_infos.date_published;
+        document.querySelector(`#BEST_ACTION_${index}_RATED`).innerHTML = film_infos.rated;
+        document.querySelector(`#BEST_ACTION_${index}_IMDBSCORE`).innerHTML = film_infos.imdb_score;
+        document.querySelector(`#BEST_ACTION_${index}_DIRECTORS`).innerHTML = film_infos.directors;
+        document.querySelector(`#BEST_ACTION_${index}_ACTORS`).innerHTML = film_infos.actors;
+        document.querySelector(`#BEST_ACTION_${index}_COUNTRIES`).innerHTML = film_infos.countries;
+        document.querySelector(`#BEST_ACTION_${index}_BOXOFFICE`).innerHTML = film_infos.worldwide_gross_income;
+        document.querySelector(`#BEST_ACTION_${index}_LONGDESCR`).innerHTML = film_infos.long_description;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -82,11 +89,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
         document.querySelector(`#BEST_FAMILY_${index}_POSTER`).src = film_infos.image_url;
+        //document.getElementById   (pour refacto)
         document.querySelector(`#BEST_FAMILY_${index}_TITLE`).innerHTML = film_infos.original_title;
         document.querySelector(`#BEST_FAMILY_${index}_DESCR`).innerHTML = film_infos.description;
         document.querySelector(`#BEST_FAMILY_${index}_GENRES`).innerHTML = film_infos.genres;
         document.querySelector(`#BEST_FAMILY_${index}_DURATION`).innerHTML = film_infos.duration;
         document.querySelector(`#BEST_FAMILY_${index}_RELEASEDATE`).innerHTML = film_infos.date_published;
+        document.querySelector(`#BEST_FAMILY_${index}_RATED`).innerHTML = film_infos.rated;
+        document.querySelector(`#BEST_FAMILY_${index}_IMDBSCORE`).innerHTML = film_infos.imdb_score;
+        document.querySelector(`#BEST_FAMILY_${index}_DIRECTORS`).innerHTML = film_infos.directors;
+        document.querySelector(`#BEST_FAMILY_${index}_ACTORS`).innerHTML = film_infos.actors;
+        document.querySelector(`#BEST_FAMILY_${index}_COUNTRIES`).innerHTML = film_infos.countries;
+        document.querySelector(`#BEST_FAMILY_${index}_BOXOFFICE`).innerHTML = film_infos.worldwide_gross_income;
+        document.querySelector(`#BEST_FAMILY_${index}_LONGDESCR`).innerHTML = film_infos.long_description;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -102,5 +117,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector(`#BEST_DRAMA_${index}_GENRES`).innerHTML = film_infos.genres;
         document.querySelector(`#BEST_DRAMA_${index}_DURATION`).innerHTML = film_infos.duration;
         document.querySelector(`#BEST_DRAMA_${index}_RELEASEDATE`).innerHTML = film_infos.date_published;
+        document.querySelector(`#BEST_DRAMA_${index}_RATED`).innerHTML = film_infos.rated;
+        document.querySelector(`#BEST_DRAMA_${index}_IMDBSCORE`).innerHTML = film_infos.imdb_score;
+        document.querySelector(`#BEST_DRAMA_${index}_DIRECTORS`).innerHTML = film_infos.directors;
+        document.querySelector(`#BEST_DRAMA_${index}_ACTORS`).innerHTML = film_infos.actors;
+        document.querySelector(`#BEST_DRAMA_${index}_COUNTRIES`).innerHTML = film_infos.countries;
+        document.querySelector(`#BEST_DRAMA_${index}_BOXOFFICE`).innerHTML = film_infos.worldwide_gross_income;
+        document.querySelector(`#BEST_DRAMA_${index}_LONGDESCR`).innerHTML = film_infos.long_description;
     });
 });
