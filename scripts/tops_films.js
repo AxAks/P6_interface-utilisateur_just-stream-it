@@ -35,6 +35,8 @@ async function fetchFilmInfosforTopTen(films_urls){
 };
 
 
+
+
 /* exemple querySelector + createElement
 showCharacters = characters => {
     const charactersDiv = document.querySelector(‘#rick-and-morty-characters’);
@@ -44,15 +46,16 @@ showCharacters = characters => {
         charactersDiv.append(characterElement);
     });}
 
-=> premiere ebauche d'utilisation
+=> premiere ebauche d'utilisation / tests avec Top action en premier
 showFilms = films => {
     const filmsDiv = document.querySelector(‘#films’);
-    films.forEach(film => {
+    films.forEach(film_infos => {
         const filmElement = document.createElement(‘p’);
         filmElement.innerText = `Film Title: ${film.original_title}`;
         filmsDiv.append(filmElement);
     });}
 */
+
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
@@ -78,6 +81,74 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector(`#BEST_OF_ALL_${index}_LONGDESCR`).innerHTML = film_infos.long_description;
     });
 });
+
+/*
+showTopActionFilms = TopActionfilms => {
+    const TopActionFilmsDiv = document.querySelector("#TopActionfilms");
+    films_infos.forEach(film_infos => {
+        const filmInfos = document.createElement("p");
+            filmInfos.innerText = `Film Title: ${films_infos.original_title}`;
+            filmInfos.innerText = `Film Description: ${films_infos.description}`;
+            filmInfos.innerText = `Film Genres: ${films_infos.genres}`;
+            filmInfos.innerText = `Film Duration: ${films_infos.duration}`;
+            filmInfos.innerText = `Film Release Date: ${films_infos.date_published}`;
+            filmInfos.innerText = `Film Rated: ${films_infos.rated}`;
+            filmInfos.innerText = `Film Score on IMDB: ${films_infos.imdb_score}`;
+            filmInfos.innerText = `Film Director(s): ${films_infos.directors}`;
+            filmInfos.innerText = `Film Actors: ${films_infos.actors}`;
+            filmInfos.innerText = `Film Countries: ${films_infos.countries}`;
+            filmInfos.innerText = `Film Box-Office: ${films_infos.worldwide_gross_income}`;
+            filmInfos.innerText = `Film Description (long): ${films_infos.long_description}`;
+        
+        const filmPoster = document.createElement("img");
+            filmPoster.src = films_infos.image_url;
+
+        TopActionFilmsDiv.append(filmInfos);
+        TopActionFilmsDiv.push({
+            filmInfos: filmInfos,
+            poster: filmPoster.src
+         });
+
+    const TopActionFilmsDiv = document.querySelector(`TopActionfilms`);
+    films_infos.forEach(film_infos => {
+        const filmInfos = document.createElement("p");
+            filmInfos.innerText = `Film Title: ${films_infos.original_title}\n`
+            /*
+            Film Description: ${films_infos.description}\n
+            Film Genres: ${films_infos.genres}\n
+            Film Duration: ${films_infos.duration}\n
+            Film Release Date: ${films_infos.date_published}\n
+            Film Rated: ${films_infos.rated}\n
+            Film Score on IMDB: ${films_infos.imdb_score}\n
+            Film Director(s): ${films_infos.directors}\n
+            Film Actors: ${films_infos.actors}\n
+            Film Countries: ${films_infos.countries}\n
+            Film Box-Office: ${films_infos.worldwide_gross_income}\n
+            Film Description (long): ${films_infos.long_description}`;
+            
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            filmInfos.innerText = ``;
+            //const filmPoster = document.createElement("img");
+        //    filmPoster.src = films_infos.image_url;
+
+        TopActionFilmsDiv.append(filmInfos);
+        
+        //TopActionFilmsDiv.push({
+        //    filmInfos: filmInfos,
+        //    poster: filmPoster.src
+        //});
+*/
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     let top_action_urls = await fetchTopTenFilmsURLs(BEST_ACTION);
     let films_infos =  await fetchFilmInfosforTopTen(top_action_urls);
