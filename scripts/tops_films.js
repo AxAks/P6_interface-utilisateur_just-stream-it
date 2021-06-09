@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_OF_ALL_${index}`).src = film_infos.image_url;
+        document.querySelector(`#BEST_OF_ALL_${index}_POSTER`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_ACTION_${index}`).src = film_infos.image_url;
+        document.querySelector(`#BEST_ACTION_${index}_POSTER`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_FAMILY_${index}`).src = film_infos.image_url;
+        document.querySelector(`#BEST_FAMILY_${index}_POSTER`).src = film_infos.image_url;
     });
 });
 document.addEventListener('DOMContentLoaded', async () => {
@@ -74,6 +74,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("index =", index);
         console.log(`getting Infos for Film ${film_infos.original_title}`, response.statusText);
         console.log(film_infos);
-        document.querySelector(`#BEST_DRAMA_${index}`).src = film_infos.image_url;
+        document.querySelector(`#BEST_DRAMA_${index}_POSTER`).src = film_infos.image_url;
     });
 });
