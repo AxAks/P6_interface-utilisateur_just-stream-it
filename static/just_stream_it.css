@@ -29,11 +29,35 @@ avec un point : class
     overflow: hidden;
     width: 100%;;
     top: 60%;
-  }
-
-  .containerTopSeven {
+}
+    
+.containerTopSeven {
     position: relative;
     overflow: hidden;
     width: 100%;
     top: 15%;
-  }
+}
+
+.topfilm {
+
+}
+
+.bestfilms {
+
+}
+
+.bestaction {
+
+}
+
+.bestfamily {
+
+}
+
+.bestdrama {
+
+}
+
+.carrousel {
+
+}
