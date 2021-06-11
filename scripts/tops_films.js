@@ -25,7 +25,8 @@ async function handleTopFilm(page_url){
 
 async function handleFilmsforTopTen(page_url){
     const films = await fetchFilmsBasicInfos(page_url);
-    const reduced_films_list = films.shift().splice(8, 3)
+    films.shift();
+    films.splice(7, 3);
     const carrousel = document.querySelector(".bestfilms > .carrousel");
     films.forEach((film_infos) => {   // à ajouter : .filter(0, 7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
@@ -34,7 +35,7 @@ async function handleFilmsforTopTen(page_url){
 
 async function handleFilmsforTopTenAction(){
     const films = await fetchFilmsBasicInfos(BEST_ACTION);
-    const reduced_films_list = films.splice(7, 3)
+    films.splice(7, 3)
     const carrousel = document.querySelector(".bestaction > .carrousel");
     films.forEach((film_infos) => { // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
@@ -43,7 +44,7 @@ async function handleFilmsforTopTenAction(){
 
 async function handleFilmsforTopTenFamily(){
     const films = await fetchFilmsBasicInfos(BEST_FAMILY);
-    const reduced_films_list = films.splice(7, 3)
+    films.splice(7, 3)
     const carrousel = document.querySelector(".bestfamily > .carrousel");
     films.forEach((film_infos) => {  // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
@@ -52,7 +53,7 @@ async function handleFilmsforTopTenFamily(){
 
 async function handleFilmsforTopTenDrama() {
     const films = await fetchFilmsBasicInfos(BEST_DRAMA);
-    const reduced_films_list = films.splice(7, 3)
+    films.splice(7, 3)
     const carrousel = document.querySelector(".bestdrama > .carrousel");
     films.forEach((film_infos) => {   // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
