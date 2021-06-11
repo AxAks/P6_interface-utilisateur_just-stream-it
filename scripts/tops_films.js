@@ -19,7 +19,7 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showFilmInfos(${films[0].id})">`;
+    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
 };
 
 async function handleTopAll(){
@@ -60,12 +60,12 @@ async function handleTopDrama() {
 }
 
 
-async function showFilmInfos() {
+async function showTopFilmInfos(film_id) {
     // Get the modal
     let modal = document.getElementById("myModal");
 
     // Get the button that opens the modal
-    let btn = document.getElementById("myBtn");
+    let btn = document.getElementById("details");
 
     // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     handleTopAction();
     handleTopFamily();
     handleTopDrama();
-    showFilmInfos();
 })
 
 /*
