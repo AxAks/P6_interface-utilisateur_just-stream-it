@@ -16,11 +16,17 @@ async function fetchFilmsBasicInfos(page_url) {
     });
 }
 
-// exemple à suivre !!
+// exemple à suivre !!handleTopFilm
+async function handleTopFilm(page_url){
+    const films = await fetchFilmsBasicInfos(page_url);
+    const topfilm = document.querySelector(".topfilm");
+    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showFilmInfos(${films[0].id})">`;
+};
+
 async function handleFilmsforTopTen(page_url){
     const films = await fetchFilmsBasicInfos(page_url);
     const carrousel = document.querySelector(".bestfilms > .carrousel");
-    films.forEach((film_infos) => {
+    films.forEach((film_infos) => {   // à ajouter : .filter(0, 7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
     });
 }
@@ -28,7 +34,7 @@ async function handleFilmsforTopTen(page_url){
 async function handleFilmsforTopTenAction(){
     const films = await fetchFilmsBasicInfos(BEST_ACTION);
     const carrousel = document.querySelector(".bestaction > .carrousel");
-    films.forEach((film_infos) => {
+    films.forEach((film_infos) => { // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
     });
 }
@@ -36,7 +42,7 @@ async function handleFilmsforTopTenAction(){
 async function handleFilmsforTopTenFamily(){
     const films = await fetchFilmsBasicInfos(BEST_FAMILY);
     const carrousel = document.querySelector(".bestfamily > .carrousel");
-    films.forEach((film_infos) => {
+    films.forEach((film_infos) => {  // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
     });
 }
@@ -44,7 +50,7 @@ async function handleFilmsforTopTenFamily(){
 async function handleFilmsforTopTenDrama() {
     const films = await fetchFilmsBasicInfos(BEST_DRAMA);
     const carrousel = document.querySelector(".bestdrama > .carrousel");
-    films.forEach((film_infos) => {
+    films.forEach((film_infos) => {   // à ajouter : .filter(7, 8, 9 ) à enlever ici
         carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
     });
 }
@@ -56,9 +62,10 @@ async function showFilmInfos(film_id)  {
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
+    handleTopFilm(BEST_OF_ALL);
     handleFilmsforTopTen(BEST_OF_ALL);
-    handleFilmsforTopTenAction(BEST_ACTION);
-    handleFilmsforTopTenFamily(BEST_FAMILY);
-    handleFilmsforTopTenDrama(BEST_DRAMA);
+    handleFilmsforTopTenAction();
+    handleFilmsforTopTenFamily();
+    handleFilmsforTopTenDrama();
 })
 
