@@ -11,7 +11,7 @@ async function fetchFilmsBasicInfos(page_url) {
     let response =  await fetch(page_url);
     let data =  await response.json();
     return data.results.map(x => { 
-        return {id: x.id, image_url: x.image_url};
+        return {id: x.id, title: x.original_title, image_url: x.image_url};
     });
 }
 
@@ -22,7 +22,7 @@ async function handleTopFilm(){
     topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showFilmInfos(${films[0].id})">`;
 };
 
-async function handleTopFilms(){
+async function handleTopAll(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     films.shift();
     films.splice(7, 3);
@@ -59,17 +59,68 @@ async function handleTopDrama() {
     });
 }
 
+
+async function showFilmInfos() {
+    // Get the modal
+    let modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    let btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+    modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+    modal.style.display = "none";
+    };
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        };
+    };
+};
+
+
+
+
+
 /// à ecrire !! 
-async function showFilmInfos(film_id)  {
+async function showFilmInfosBlabla(film_id)  {
     alert(film_id);
 };
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
     handleTopFilm();
-    handleTopFilms();
+    handleTopAll();
     handleTopAction();
     handleTopFamily();
     handleTopDrama();
+    showFilmInfos();
 })
 
+/*
+juste un memo des infos nécessaires à recupérer et afficher sur les fiches films
+à supprimer ensuite!
+<img id="BEST_OF_ALL_0_POSTER">
+<p id="BEST_OF_ALL_0_TITLE"></p>
+<p id="BEST_OF_ALL_0_DESCR"></p>
+<p id="BEST_OF_ALL_0_GENRES"></p>
+<p id="BEST_OF_ALL_0_DURATION"></p>
+<p id="BEST_OF_ALL_0_RELEASEDATE"></p>
+<p id="BEST_OF_ALL_0_RATED"></p>
+<p id="BEST_OF_ALL_0_IMDBSCORE"></p>
+<p id="BEST_OF_ALL_0_DIRECTORS"></p>
+<p id="BEST_OF_ALL_0_ACTORS"></p>
+<p id="BEST_OF_ALL_0_COUNTRIES"></p>
+<p id="BEST_OF_ALL_0_BOXOFFICE"></p>
+<p id="BEST_OF_ALL_0_LONGDESCR"></p>
+*/

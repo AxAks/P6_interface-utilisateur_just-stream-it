@@ -1,17 +1,16 @@
 header {
-    height: 20%;
-    text-align: center;
+    text-align: left;
 }
 
 section {
-    text-align: center;
+
 }
 
 nav {
-    text-align: center;
+
 }
+
 body {
-    height: 80%;
     background-color: grey;
 }
 
@@ -24,18 +23,16 @@ sans point : balise
 avec un point : class
 */
 
-.containerTopFilm {
+.TopFilm {
     position: relative;
     overflow: hidden;
     width: 100%;;
-    top: 60%;
 }
     
-.containerTopSeven {
+.TopsSeven {
     position: relative;
     overflow: hidden;
     width: 100%;
-    top: 15%;
 }
 
 .topfilm {
@@ -60,4 +57,41 @@ avec un point : class
 
 .carrousel {
 
+}
+
+.filmdetailsmodal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.filmdetailsmodal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
