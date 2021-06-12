@@ -55,47 +55,54 @@ async function handleTopDrama() {
     films.splice(7, 3)
     const carrousel = document.querySelector(".bestdrama > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
+        carrousel.innerHTML +=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
     });
 }
 
-
+// à améliorier !!!!!!
 async function showTopFilmInfos(film_id) {
-    // Get the modal
-    let modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    let btn = document.getElementById("details");
-
-    // Get the <span> element that closes the modal
-    let span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-    modal.style.display = "block";
-    };
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-    modal.style.display = "none";
-    };
+    let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
+    let detailed_infos =  await response.json();
+    const  required_infos = {
+        Title: detailed_infos.original_title,
+        Directors: detailed_infos.directors,
+        Actors: detailed_infos.actors,
+        Genres: detailed_infos.genres,
+        Countries: detailed_infos.countries,
+        ReleaseDate: detailed_infos.date_published,
+        Duration: detailed_infos.duration,
+        Rated: detailed_infos.rated,
+        BoxOffice: detailed_infos.worldwide_gross_income,
+        LongDescription: detailed_infos.long_description
+    }
     
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+    let modal = document.getElementById("myModal");         // Get the modal
+    let btn = document.getElementById("details");           // Get the button that opens the modal
+    let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+    let content = document.getElementById("myModalContent");
+    
+    btn.onclick = function() {
+        modal.style.display = "block";
+        };                                                      // When the user clicks on the button, open the modal
+        for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+            content.innerHTML += `<p>${key}: ${value}</p>`;
+        }
+        span.onclick = function() {
+        modal.style.display = "none";
         };
+        for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+            content.innerHTML -= `<p>${key}: ${value}</p>`;
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            };
+            for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+                content.innerHTML -= `<p>${key}: ${value}</p>`;
+            }                                               // When the user clicks anywhere outside of the modal, close it
+        };
+
     };
-};
-
-
-
-
-
-/// à ecrire !! 
-async function showFilmInfosBlabla(film_id)  {
-    alert(film_id);
-};
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
@@ -105,21 +112,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     handleTopFamily();
     handleTopDrama();
 })
-
-/*
-juste un memo des infos nécessaires à recupérer et afficher sur les fiches films
-à supprimer ensuite!
-<img id="BEST_OF_ALL_0_POSTER">
-<p id="BEST_OF_ALL_0_TITLE"></p>
-<p id="BEST_OF_ALL_0_DESCR"></p>
-<p id="BEST_OF_ALL_0_GENRES"></p>
-<p id="BEST_OF_ALL_0_DURATION"></p>
-<p id="BEST_OF_ALL_0_RELEASEDATE"></p>
-<p id="BEST_OF_ALL_0_RATED"></p>
-<p id="BEST_OF_ALL_0_IMDBSCORE"></p>
-<p id="BEST_OF_ALL_0_DIRECTORS"></p>
-<p id="BEST_OF_ALL_0_ACTORS"></p>
-<p id="BEST_OF_ALL_0_COUNTRIES"></p>
-<p id="BEST_OF_ALL_0_BOXOFFICE"></p>
-<p id="BEST_OF_ALL_0_LONGDESCR"></p>
-*/
