@@ -19,7 +19,7 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
+    topfilm.innerHTML = `<img id="details" src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
 };
 
 async function handleTopAll(){
@@ -81,28 +81,31 @@ async function showTopFilmInfos(film_id) {
     let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
     let content = document.getElementById("myModalContent");
     
-    btn.onclick = function() {
-        modal.style.display = "block";
-        };                                                      // When the user clicks on the button, open the modal
+    btn.onclick = function() { // Pb affichage on dirait qu'il faut cliquer deux fois
+        modal.style.display = "block";                                                 // When the user clicks on the button, open the modal
+        };
         for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
             content.innerHTML += `<p>${key}: ${value}</p>`;
-        }
+        };
         span.onclick = function() {
         modal.style.display = "none";
         };
-        for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
-            content.innerHTML -= `<p>${key}: ${value}</p>`;
-        }
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-            };
-            for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
-                content.innerHTML -= `<p>${key}: ${value}</p>`;
-            }                                               // When the user clicks anywhere outside of the modal, close it
+            };                                             // When the user clicks anywhere outside of the modal, close it
         };
-
     };
+
+
+
+
+
+
+
+
+
+
 
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
