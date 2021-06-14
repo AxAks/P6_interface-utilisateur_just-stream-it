@@ -28,6 +28,7 @@ avec un point : class
     position: relative;
     overflow: hidden;
     width: 100%;
+    padding-left: 50px;
 }
     
 .TopsSeven {
@@ -38,7 +39,11 @@ avec un point : class
 }
 
 .topfilm {
+    display: flex;
+}
 
+.topfilmBasicInfos {
+    display: flex;
 }
 
 .bestfilms {
@@ -58,7 +63,8 @@ avec un point : class
 }
 
 .carrousel {
-    
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .filmdetailsmodal {

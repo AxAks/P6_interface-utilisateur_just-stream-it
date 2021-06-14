@@ -19,7 +19,8 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img id="details" src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
+    topfilm.innerHTML = `<img id="details" src="${films[0].image_url}" onclick="showTopFilmDetailedInfos(${films[0].id})">`;
+    
 };
 
 async function handleTopAll(){
@@ -28,7 +29,7 @@ async function handleTopAll(){
     films.splice(7, 3);
     const carrousel = document.querySelector(".bestfilms > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
+        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmDetailedInfos(${film_infos.id})">`;
     });
 }
 
@@ -37,7 +38,7 @@ async function handleTopAction(){
     films.splice(7, 3)
     const carrousel = document.querySelector(".bestaction > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
+        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmDetailedInfos(${film_infos.id})">`;
     });
 }
 
@@ -46,7 +47,7 @@ async function handleTopFamily(){
     films.splice(7, 3)
     const carrousel = document.querySelector(".bestfamily > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
+        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showFilmDetailedInfos(${film_infos.id})">`;
     });
 }
 
@@ -55,12 +56,13 @@ async function handleTopDrama() {
     films.splice(7, 3)
     const carrousel = document.querySelector(".bestdrama > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML +=`<img src="${film_infos.image_url}" onclick="showFilmInfos(${film_infos.id})">`;
+        carrousel.innerHTML +=`<img src="${film_infos.image_url}" onclick="showFilmDetailedInfos(${film_infos.id})">`;
     });
 }
 
+
 // à améliorier !!!!!!
-async function showTopFilmInfos(film_id) {
+async function showTopFilmDetailedInfos(film_id) {
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos =  await response.json();
     const  required_infos = {
@@ -74,8 +76,9 @@ async function showTopFilmInfos(film_id) {
         Rated: detailed_infos.rated,
         BoxOffice: detailed_infos.worldwide_gross_income,
         LongDescription: detailed_infos.long_description
-    }
-    
+
+    };
+
     let modal = document.getElementById("myModal");         // Get the modal
     let btn = document.getElementById("details");           // Get the button that opens the modal
     let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
@@ -98,15 +101,7 @@ async function showTopFilmInfos(film_id) {
     };
 
 
-
-
-
-
-
-
-
-
-
+    
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
     handleTopFilm();
