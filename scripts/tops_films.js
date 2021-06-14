@@ -11,7 +11,7 @@ async function fetchFilmsBasicInfos(page_url) {
     let response =  await fetch(page_url);
     let data =  await response.json();
     return data.results.map(x => { 
-        return {id: x.id, title: x.original_title, image_url: x.image_url};
+        return {id: x.id, image_url: x.image_url};
     });
 }
 
@@ -27,7 +27,7 @@ async function handleTopAll(){
     films.shift();
     films.splice(7, 3);
     const carrousel = document.querySelector(".bestfilms > .carrousel");
-    films.forEach((film_infos, index) => {
+    films.forEach((film_infos) => {
         carrousel.innerHTML+=`<img id="details" src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
 
     });
@@ -63,9 +63,12 @@ async function handleTopDrama() {
 
 // à améliorier !!!!!!
 async function showDetailedInfos(film_id) {
+    alert(film_id);
+};
+    /*
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos =  await response.json();
-    let  required_infos = {
+    let required_infos = {
         Title: detailed_infos.original_title,
         Directors: detailed_infos.directors,
         Actors: detailed_infos.actors,
@@ -76,11 +79,10 @@ async function showDetailedInfos(film_id) {
         Rated: detailed_infos.rated,
         BoxOffice: detailed_infos.worldwide_gross_income,
         LongDescription: detailed_infos.long_description
-
     };
 
     let modal = document.getElementById("myModal");         // Get the modal
-    let btn = document.getElementById("details");           // Get the button that opens the modal
+    let btn = document.getElementBy("details");           // Get the button that opens the modal
     let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
     let content = document.getElementById("myModalContent");
     
@@ -99,8 +101,7 @@ async function showDetailedInfos(film_id) {
             };                                             // When the user clicks anywhere outside of the modal, close it
         };
     };
-
-
+*/
     
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {

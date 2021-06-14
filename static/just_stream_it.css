@@ -1,7 +1,7 @@
 header {
-    padding-left: 20px;
+    padding-left: 50px;
     display: flex;
-    text-align: center;
+    text-align: justify;
     background-color: rgb(20, 20, 20);
 }
 
@@ -9,11 +9,12 @@ section {
 
 }
 
+h1 {
+    display: flex;
+}
+
 h3 {
     padding-left: 50px;
-}
-nav {
-
 }
 
 body {
