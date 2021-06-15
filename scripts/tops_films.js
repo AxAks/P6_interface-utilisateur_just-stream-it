@@ -5,6 +5,10 @@ const BEST_ACTION = "http://localhost:8000/api/v1/titles/?page=1&page_size=10&ge
 const BEST_DRAMA = "http://localhost:8000/api/v1/titles/?page=1&page_size=10&genre=drama&sort_by=-imdb_score&sort_by=-votes"
 const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?page=1&page_size=10&genre=family&sort_by=-imdb_score&sort_by=-votes"
 
+let topAllFilms;
+let topActionFilms;
+let topFamilyFilms;
+let topDramaFilms;
 
 // à garder !!
 async function fetchFilmsBasicInfos(page_url) {
@@ -15,57 +19,46 @@ async function fetchFilmsBasicInfos(page_url) {
     });
 }
 
-// exemple à suivre !!
+// exemple à suivre !! mais gestion affichage des infos differente..
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
     topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
 };
 
-async function handleTopAll(){
-    const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    films.shift();
-    films.splice(7, 3);
-    const carrousel = document.querySelector(".bestfilms > .carrousel");
-    films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
 
-    });
-}
+async function handleTopAll(){
+    topAllFilms = await fetchFilmsBasicInfos(BEST_OF_ALL);
+    topAllFilms.shift();
+    topAllFilms.splice(7, 3);
+    handleCarrousel('bestfilms', '');
+};
 
 async function handleTopAction(){
-    const films = await fetchFilmsBasicInfos(BEST_ACTION);
-    films.splice(7, 3)
-    const carrousel = document.querySelector(".bestaction > .carrousel");
-    films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
-    });
-}
+    topActionFilms = await fetchFilmsBasicInfos(BEST_ACTION);
+    topActionFilms.splice(7, 3)
+    handleCarrousel('bestaction', '');
+};
 
 async function handleTopFamily(){
-    const films = await fetchFilmsBasicInfos(BEST_FAMILY);
-    films.splice(7, 3)
-    const carrousel = document.querySelector(".bestfamily > .carrousel");
-    films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
-    });
-}
+    topFamilyFilms = await fetchFilmsBasicInfos(BEST_FAMILY);
+    topFamilyFilms.splice(7, 3)
+    handleCarrousel('bestfamily', '');
+};
 
 async function handleTopDrama() {
-    const films = await fetchFilmsBasicInfos(BEST_DRAMA);
-    films.splice(7, 3)
-    const carrousel = document.querySelector(".bestdrama > .carrousel");
-    films.forEach((film_infos) => {
-        carrousel.innerHTML +=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
-    });
-}
+    topDramaFilms = await fetchFilmsBasicInfos(BEST_DRAMA);
+    topDramaFilms.splice(7, 3)
+    handleCarrousel('bestdrama', '');
+};
 
-
+// à finir !!!
 async function showTopFilmInfos(film_id) {
     required_infos = await getInfos(film_id);
-    
+
 }
 
+// à améliorer
 async function showDetailedInfos(film_id) {
     required_infos = await getInfos(film_id);
 
@@ -89,6 +82,7 @@ async function showDetailedInfos(film_id) {
     };
 }
 
+// à améliorer
 async function getInfos(film_id){
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos =  await response.json();
@@ -107,7 +101,73 @@ async function getInfos(film_id){
     return required_infos;
 
 }
-    
+
+
+
+async function handleCarrousel (category, up_or_down) {
+    let films;
+    let new_films;
+    let carrousel;
+
+    //mettre dans une fonction à part
+    if(category == 'bestfilms') {
+        films = topAllFilms;
+        carrousel = document.querySelector(".bestfilms > .carrousel");
+    }
+    else if(category == 'bestaction') {
+        films = topActionFilms;
+        carrousel = document.querySelector(".bestaction > .carrousel");
+    }
+    else if(category == 'bestfamily') {
+        films = topFamilyFilms;
+        carrousel = document.querySelector(".bestfamily > .carrousel");
+    }
+    else if(category == 'bestdrama') {
+        films = topDramaFilms;
+        carrousel = document.querySelector(".bestdrama > .carrousel");
+    };
+
+    //mettre dans une fonction à part 
+    if(up_or_down == 'up'){
+        new_films = films.slice(1);
+        new_films.push(films[0]);
+    }
+    else if(up_or_down == 'down') {
+        new_films = films.slice(0, -1);
+        new_films.unshift(films[6]);
+    }
+    else {
+        new_films = films;
+    };
+    carrousel.innerHTML = '';
+    new_films.forEach((film_infos, index) => {
+        if (index < 4){
+           carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
+        };
+    });
+
+    if(category == 'bestfilms') {
+        topAllFilms = new_films;
+    }
+    else if(category == 'bestaction') {
+        topActionFilms = new_films;
+    }
+    else if(category == 'bestfamily') {
+        topFamilyFilms = new_films;
+    }
+    else if(category == 'bestdrama') {
+        topDramaFilms = new_films;
+    };
+};
+
+
+
+
+
+
+
+
+
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
     handleTopFilm();
