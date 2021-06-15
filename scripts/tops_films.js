@@ -19,7 +19,7 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img id="details" src="${films[0].image_url}" onclick="showDetailedInfos(${films[0].id})">`;
+    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
 };
 
 async function handleTopAll(){
@@ -28,7 +28,7 @@ async function handleTopAll(){
     films.splice(7, 3);
     const carrousel = document.querySelector(".bestfilms > .carrousel");
     films.forEach((film_infos) => {
-        carrousel.innerHTML+=`<img id="details" src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
+        carrousel.innerHTML+=`<img src="${film_infos.image_url}" onclick="showDetailedInfos(${film_infos.id})">`;
 
     });
 }
@@ -61,11 +61,35 @@ async function handleTopDrama() {
 }
 
 
-// à améliorier !!!!!!
+async function showTopFilmInfos(film_id) {
+    required_infos = await getInfos(film_id);
+    
+}
+
 async function showDetailedInfos(film_id) {
-    alert(film_id);
-};
-    /*
+    required_infos = await getInfos(film_id);
+
+    let modal = document.getElementById("myModal");         // Get the modal
+    let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+    let content = document.getElementById("myModalContent");
+    content.innerHTML = '';
+    
+    modal.style.display = "block";                                                 // When the user clicks on the button, open the modal
+        
+    for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+        content.innerHTML += `<p>${key}: ${value}</p>`;
+    };
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        };                                             // When the user clicks anywhere outside of the modal, close it
+    };
+}
+
+async function getInfos(film_id){
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos =  await response.json();
     let required_infos = {
@@ -80,28 +104,9 @@ async function showDetailedInfos(film_id) {
         BoxOffice: detailed_infos.worldwide_gross_income,
         LongDescription: detailed_infos.long_description
     };
+    return required_infos;
 
-    let modal = document.getElementById("myModal");         // Get the modal
-    let btn = document.getElementBy("details");           // Get the button that opens the modal
-    let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
-    let content = document.getElementById("myModalContent");
-    
-    btn.onclick = function() { // Pb affichage on dirait qu'il faut cliquer deux fois
-        modal.style.display = "block";                                                 // When the user clicks on the button, open the modal
-        };
-        for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
-            content.innerHTML += `<p>${key}: ${value}</p>`;
-        };
-        span.onclick = function() {
-        modal.style.display = "none";
-        };
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            };                                             // When the user clicks anywhere outside of the modal, close it
-        };
-    };
-*/
+}
     
 // Chargement  au démarrage, à simplifier ?
 document.addEventListener('DOMContentLoaded', async () => {
