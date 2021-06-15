@@ -23,9 +23,23 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img src="${films[0].image_url}" onclick="showTopFilmInfos(${films[0].id})">`;
+    topfilm.innerHTML = `<img src="${films[0].image_url}">`;
+
+    let top_film_infos_section = document.querySelector(".topfilmBasicInfos");
+    let  required_infos = await getInfos(films[0].id);
+    for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+        top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
+    };
 };
 
+/*
+// à finir !!!
+async function showTopFilmInfos(film_id) {
+    top_film_infos_section = document.querySelector(".topfilmBasicInfos");
+    required_infos = await getInfos(film_id);
+    top_film_infos_section.innerHTML = required_infos;
+}
+*/
 
 async function handleTopAll(){
     topAllFilms = await fetchFilmsBasicInfos(BEST_OF_ALL);
@@ -52,11 +66,8 @@ async function handleTopDrama() {
     handleCarrousel('bestdrama', '');
 };
 
-// à finir !!!
-async function showTopFilmInfos(film_id) {
-    required_infos = await getInfos(film_id);
 
-}
+
 
 // à améliorer
 async function showDetailedInfos(film_id) {
@@ -87,21 +98,20 @@ async function getInfos(film_id){
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos =  await response.json();
     let required_infos = {
-        Title: detailed_infos.original_title,
-        Directors: detailed_infos.directors,
-        Actors: detailed_infos.actors,
-        Genres: detailed_infos.genres,
-        Countries: detailed_infos.countries,
-        Release: detailed_infos.date_published,
-        Duration: detailed_infos.duration,
-        Rated: detailed_infos.rated,
-        BoxOffice: detailed_infos.worldwide_gross_income,
-        Description: detailed_infos.long_description
+        'Title': detailed_infos.original_title,
+        'Directors': detailed_infos.directors,
+        'Actors': detailed_infos.actors,
+        'Genres': detailed_infos.genres,
+        'Countries': detailed_infos.countries,
+        'Release Date': detailed_infos.date_published,
+        'Duration': detailed_infos.duration,
+        'Rated': detailed_infos.rated,
+        'Box Office': `$ ${detailed_infos.worldwide_gross_income}`,
+        'Long Description': detailed_infos.long_description
     };
     return required_infos;
 
 }
-
 
 
 async function handleCarrousel (category, up_or_down) {
@@ -159,12 +169,6 @@ async function handleCarrousel (category, up_or_down) {
         topDramaFilms = new_films;
     };
 };
-
-
-
-
-
-
 
 
 
