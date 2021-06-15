@@ -92,11 +92,11 @@ async function getInfos(film_id){
         Actors: detailed_infos.actors,
         Genres: detailed_infos.genres,
         Countries: detailed_infos.countries,
-        ReleaseDate: detailed_infos.date_published,
+        Release: detailed_infos.date_published,
         Duration: detailed_infos.duration,
         Rated: detailed_infos.rated,
         BoxOffice: detailed_infos.worldwide_gross_income,
-        LongDescription: detailed_infos.long_description
+        Description: detailed_infos.long_description
     };
     return required_infos;
 
