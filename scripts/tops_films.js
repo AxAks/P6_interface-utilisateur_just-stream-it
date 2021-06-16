@@ -33,10 +33,10 @@ async function handleTopFilm(){
         top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
     };
 };
-
+q
 
 // Gestion des Top Categories
-//essayer de factoriser en handleTops(caterogy) avec variable category et if all : shift() 
+//essayer de factoriser en handleTops(category) avec variable category et if all : shift() 
 async function handleTopAll(){
     topAllFilms = await fetchFilmsBasicInfos(BEST_OF_ALL);
     topAllFilms.shift();
