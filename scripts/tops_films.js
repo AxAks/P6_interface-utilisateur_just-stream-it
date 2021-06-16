@@ -33,7 +33,6 @@ async function handleTopFilm(){
         top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
     };
 };
-q
 
 // Gestion des Top Categories
 //essayer de factoriser en handleTops(category) avec variable category et if all : shift() 
