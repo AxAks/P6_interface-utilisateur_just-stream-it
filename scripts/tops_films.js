@@ -5,10 +5,10 @@ const BEST_ACTION = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&gen
 const BEST_DRAMA = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&genre=drama&sort_by=-imdb_score&sort_by=-votes"
 const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&genre=family&sort_by=-imdb_score&sort_by=-votes"
 
-let topAllFilms;
-let topActionFilms;
-let topFamilyFilms;
-let topDramaFilms;
+let topAll;
+let topAction;
+let topFamily;
+let topDrama;
 
 
 async function fetchFilmsBasicInfos(page_url) {
@@ -24,37 +24,38 @@ async function fetchFilmsBasicInfos(page_url) {
 // exemple à suivre !! mais gestion affichage des infos differente..
 async function handleTopFilm(){
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    const topfilm = document.querySelector(".topfilm");
-    topfilm.innerHTML = `<img src="${films[0].image_url}">`;
-
     let top_film_infos_section = document.querySelector(".topfilmBasicInfos");
     let  required_infos = await getInfos(films[0].id);
-    for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
-        top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
+    for (const [key, value] of Object.entries(required_infos)) {
+        if (key == 'Poster' || key == 'Title' || key == 'Long Description') { 
+            top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
+        };
     };
+    top_film_infos_section.innerHTML += `<button onclick="showDetailedInfos(${films[0].id})"> Plus d'infos</button>`;  // pas bien car je ne peux pas manipuler le bouton
 };
 
 // Gestion des Top Categories
 //essayer de factoriser en handleTops(category) avec variable category et if all : shift() 
-async function handleTopAll(){
-    topAllFilms = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    topAllFilms.shift();
+
+async function handleTopAll() {
+    topAll = await fetchFilmsBasicInfos(BEST_OF_ALL);
+    topAll.shift();
     handleCarrousel('bestfilms', '');
 };
 
-async function handleTopAction(){
-    topActionFilms = await fetchFilmsBasicInfos(BEST_ACTION);
+async function handleTopAction() {
+    topAction = await fetchFilmsBasicInfos(BEST_ACTION);
     handleCarrousel('bestaction', '');
 };
 
-async function handleTopFamily(){
-    topFamilyFilms = await fetchFilmsBasicInfos(BEST_FAMILY);
+async function handleTopFamily() {
+    topFamily = await fetchFilmsBasicInfos(BEST_FAMILY);
     handleCarrousel('bestfamily', '');
 };
 
 async function handleTopDrama() {
-    topDramaFilms = await fetchFilmsBasicInfos(BEST_DRAMA);
-    topDramaFilms.splice(7, 3)
+    topDrama = await fetchFilmsBasicInfos(BEST_DRAMA);
+    topDrama.splice(7, 3)
     handleCarrousel('bestdrama', '');
 };
 
@@ -94,7 +95,7 @@ async function showDetailedInfos(film_id) {
     
     modal.style.display = "block";                                                 // When the user clicks on the button, open the modal
         
-    for (const [key, value] of Object.entries(required_infos)) {   // comment on fait avec un for each + dict(object)?
+    for (const [key, value] of Object.entries(required_infos)) {
         content.innerHTML += `<p>${key}: ${value}</p>`;
     };
     span.onclick = function() {
@@ -117,19 +118,19 @@ async function handleCarrousel (category, up_or_down) {
 
     //mettre dans une fonction à part
     if(category == 'bestfilms') {
-        films = topAllFilms;
+        films = topAll;
         carrousel = document.querySelector(".bestfilms > .carrousel");
     }
     else if(category == 'bestaction') {
-        films = topActionFilms;
+        films = topAction;
         carrousel = document.querySelector(".bestaction > .carrousel");
     }
     else if(category == 'bestfamily') {
-        films = topFamilyFilms;
+        films = topFamily;
         carrousel = document.querySelector(".bestfamily > .carrousel");
     }
     else if(category == 'bestdrama') {
-        films = topDramaFilms;
+        films = topDrama;
         carrousel = document.querySelector(".bestdrama > .carrousel");
     };
 
@@ -153,16 +154,16 @@ async function handleCarrousel (category, up_or_down) {
     });
 
     if(category == 'bestfilms') {
-        topAllFilms = new_films;
+        topAll = new_films;
     }
     else if(category == 'bestaction') {
-        topActionFilms = new_films;
+        topAction = new_films;
     }
     else if(category == 'bestfamily') {
-        topFamilyFilms = new_films;
+        topFamily = new_films;
     }
     else if(category == 'bestdrama') {
-        topDramaFilms = new_films;
+        topDrama = new_films;
     };
 };
 
