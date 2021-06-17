@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
-    <link href="../static/just_stream_it.css" rel="stylesheet" media="all" type="text/css"> 
+    <link href="../static/just_stream_it.css" rel="stylesheet" media="all" type="text/css">
 </head>
 
-<body>         
+<body>
     <header>
         <h1>Just Stream It !</h1>
         <h1>Catégories</h1>
@@ -18,52 +19,52 @@
     -->
 
     <div id="myModal" class="filmdetailsmodal">
-    
+
         <!-- Modal content -->
         <div id="myModalContent" class="filmdetails-modal-content">
             <span class="close">&times;</span>
         </div>
-    </div>  
+    </div>
 
     <main>
-        <h3>Meilleur film</h3>
-        <section class= "TopFilm">
-            <div class="topfilmBasicInfos"></div>
-        </section>
+        <div class="topfilmBasicInfos"></div>
     </main>
-    
-    <h3>Meilleurs films toute catégorie</h3>
+
     <section class="TopsSeven bestfilms">
+        <h3>Meilleurs films toute catégorie</h3>
         <div class=" arrow_left" onclick="handleCarrousel('bestfilms', 'down')"></div>
-            <div class="carrousel"></div>
+        <div class="carrousel"></div>
         <div class=" arrow_right" onclick="handleCarrousel('bestfilms', 'up')"></div>
     </section>
 
-    <h3>Meilleurs films d'action</h3>
     <section class="TopsSeven bestaction">
+        <h3>Meilleurs films d'action</h3>
         <div class="arrow_left" onclick="handleCarrousel('bestaction', 'down')"></div>
-            <div class="carrousel"></div>
+        <div class="carrousel"></div>
         <div class="arrow_right" onclick="handleCarrousel('bestaction', 'up')"></div>
     </section>
 
-    <h3>Meilleurs films familiaux</h3>
     <section class="TopsSeven bestfamily">
+        <h3>Meilleurs films familiaux</h3>
         <div class="arrow_left" onclick="handleCarrousel('bestfamily', 'down')"></div>
-            <div class="carrousel"></div>
+        <div class="carrousel"></div>
         <div class="arrow_right" onclick="handleCarrousel('bestfamily', 'up')"></div>
     </section>
 
-    <h3>Meilleurs films dramatiques</h3>
     <section class="TopsSeven bestdrama">
+        <h3>Meilleurs films dramatiques</h3>
         <div class="arrow_left" onclick="handleCarrousel('bestdrama', 'down')"></div>
-            <div class="carousel__slide carrousel"></div>
-            <div class="arrow_right" onclick="handleCarrousel('bestdrama', 'up')"></div>
+        <div class="carousel__slide carrousel"></div>
+        <div class="arrow_right" onclick="handleCarrousel('bestdrama', 'up')"></div>
     </section>
 
     <footer>
         <p> Just Stream It ! </p>
     </footer>
 
-<script type="text/javascript" src="../scripts/tops_films.js"> <!-- Javascript Code // --> </script>
+    <script src="../scripts/tops_films.js">
+        <!-- Javascript Code // -->
+    </script>
 </body>
+
 </html>
