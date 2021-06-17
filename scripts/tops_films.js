@@ -25,12 +25,14 @@ async function fetchFilmsBasicInfos(page_url) {
 async function handleTopFilm() {
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     let top_film_infos_section = document.querySelector(".topfilmBasicInfos");
-    let required_infos = await getInfos(films[0].id);
-    for (const [key, value] of Object.entries(required_infos)) {
-        if (key == 'Poster' ||  key == 'Title' || key == 'Long Description') {
+    let film_infos = await getInfos(films[0].id);
+    top_film_infos_section.innerHTML = `<img src="${film_infos.image_url}">`
+    for (const [key, value] of Object.entries(film_infos.required_infos)) {
+        if (key == 'Title' || key == 'Description') {
             top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
         };
     };
+
     top_film_infos_section.innerHTML += `<button onclick="showDetailedInfos(${films[0].id})"> Plus d'infos</button>`; // pas bien car je ne peux pas manipuler le bouton
 };
 
@@ -59,14 +61,13 @@ async function handleTopDrama() {
 };
 
 
-
 //Récuperation des infos pour un film
 // à améliorer
 async function getInfos(film_id) {
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos = await response.json();
+    let image_url = detailed_infos.image_url
     let required_infos = {
-        'Poster': `<img src="${detailed_infos.image_url}">`, // sortir l'image dans une fonction propre
         'Title': detailed_infos.original_title,
         'Directors': detailed_infos.directors,
         'Actors': detailed_infos.actors,
@@ -76,16 +77,17 @@ async function getInfos(film_id) {
         'Duration': detailed_infos.duration,
         'Rated': detailed_infos.rated,
         'Box Office': `$ ${detailed_infos.worldwide_gross_income}`,
+        'Description': detailed_infos.description,
         'Long Description': detailed_infos.long_description
     };
-    return required_infos;
+    return { image_url, required_infos }
 
 };
 
 //Affichage des infos pour un film
 // à améliorer + bouton close foireux
 async function showDetailedInfos(film_id) {
-    required_infos = await getInfos(film_id);
+    film_infos = await getInfos(film_id);
 
     let modal = document.getElementById("myModal"); // Get the modal
     let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
@@ -94,8 +96,11 @@ async function showDetailedInfos(film_id) {
 
     modal.style.display = "block"; // When the user clicks on the button, open the modal
 
-    for (const [key, value] of Object.entries(required_infos)) {
-        content.innerHTML += `<p>${key}: ${value}</p>`;
+    content.innerHTML = `<img src="${film_infos.image_url}">`
+    for (const [key, value] of Object.entries(film_infos.required_infos)) {
+        if (key != 'Description') {
+            content.innerHTML += `<p>${key}: ${value}</p>`;
+        };
     };
     span.onclick = function() {
         modal.style.display = "none";
