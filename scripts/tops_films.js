@@ -24,16 +24,20 @@ async function fetchFilmsBasicInfos(page_url) {
 // exemple à suivre !! mais gestion affichage des infos differente..
 async function handleTopFilm() {
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    let top_film_infos_section = document.querySelector(".top-film-basic-infos");
     let film_infos = await getInfos(films[0].id);
-    top_film_infos_section.innerHTML += `<img src="${film_infos.image_url}">`
+
+    let top_film_poster = document.querySelector(".top-film-poster");
+    let top_film_infos_section = document.querySelector(".top-film-basic-infos");
+    let more_infos_button = document.querySelector(".more-infos-button");
+
+    top_film_poster.innerHTML = `<img src="${film_infos.image_url}">`
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
             top_film_infos_section.innerHTML += `<p>${value}</p>`;
         };
+        more_infos_button.innerHTML = `<button onclick="showDetailedInfos(${films[0].id})"> Plus d'infos</button>`; // pas bien car je ne peux pas manipuler le bouton
     };
 
-    top_film_infos_section.innerHTML += `<button onclick="showDetailedInfos(${films[0].id})"> Plus d'infos</button>`; // pas bien car je ne peux pas manipuler le bouton
 };
 
 // Gestion des Top Categories

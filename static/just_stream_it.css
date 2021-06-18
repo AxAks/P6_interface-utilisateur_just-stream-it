@@ -17,8 +17,8 @@ body {
     font-size-adjust: inherit;
 }
 
-main {
-    display: block;
+main div {
+    display: flex;
 }
 
 section {
@@ -40,7 +40,7 @@ section div {
 
 .top-film-basic-infos {
     display: flex;
-    background-color: grey;
+    flex-direction: column;
     color: white;
     background-color: #4d6864;
     padding: 20px;
