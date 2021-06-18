@@ -73,13 +73,14 @@ async function getInfos(film_id) {
     let image_url = detailed_infos.image_url
     let required_infos = {
         'Title': detailed_infos.original_title,
+        'Genres': detailed_infos.genres,
+        'Release Date': detailed_infos.date_published,
+        'Rated': detailed_infos.rated,
+        'IMDB Score': detailed_infos.imdb_score,
         'Directors': detailed_infos.directors,
         'Actors': detailed_infos.actors,
-        'Genres': detailed_infos.genres,
-        'Countries': detailed_infos.countries,
-        'Release Date': detailed_infos.date_published,
         'Duration': detailed_infos.duration,
-        'Rated': detailed_infos.rated,
+        'Countries': detailed_infos.countries,
         'Box Office': `$ ${detailed_infos.worldwide_gross_income}`,
         'Description': detailed_infos.description,
         'Long Description': detailed_infos.long_description
