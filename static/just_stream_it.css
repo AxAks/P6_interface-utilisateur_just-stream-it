@@ -4,16 +4,17 @@ avec un point : class -> à privilégier mais quand on ne peut pas utiliser la h
 si possible utiliser au max la hierarchie du DOM
 */
 
-header {
-    padding-left: 50px;
-    display: flex;
-    text-align: justify;
+header h1 {
+    text-align: center;
+    font-family: cursive;
+    font-size: 2vw;
     background-color: rgb(20, 20, 20);
 }
 
 body {
     background-color: rgb(20, 20, 20);
     color: rgb(250, 250, 50);
+    font-size-adjust: inherit;
 }
 
 main {
@@ -26,16 +27,25 @@ section {
     align-items: center;
 }
 
+section h3 {
+    font-family: cursive;
+    font-size: 1vw;
+}
+
 section div {
     display: flex;
     align-items: center;
+    ;
 }
 
 .top-film-basic-infos {
+    display: flex;
     background-color: grey;
     color: white;
     background-color: #4d6864;
     padding: 20px;
+    align-items: center;
+    text-indent: 1vw;
 }
 
 
@@ -90,7 +100,7 @@ section div {
     top: 50px;
     background-color: #fefefe;
     color: black;
-    margin: 15% auto;
+    margin: 2% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
@@ -98,4 +108,5 @@ section div {
 
 footer {
     text-align: right;
+    font-family: cursive;
 }
