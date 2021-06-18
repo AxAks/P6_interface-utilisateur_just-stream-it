@@ -1,3 +1,9 @@
+/* 
+sans point : balise  -> eviter de modifier le comportement des balises HTML au maximum
+avec un point : class -> à privilégier mais quand on ne peut pas utiliser la hierarchie du DOM
+si possible utiliser au max la hierarchie du DOM
+*/
+
 header {
     padding-left: 50px;
     display: flex;
@@ -5,90 +11,43 @@ header {
     background-color: rgb(20, 20, 20);
 }
 
-section {}
-
-h1 {
-    display: flex;
-}
-
-h3 {
-    padding-left: 50px;
-}
-
 body {
     background-color: rgb(20, 20, 20);
     color: rgb(250, 250, 50);
 }
 
-footer {
-    text-align: right;
-}
-
-
-/* 
-sans point : balise
-avec un point : class
-*/
-
-.TopFilm {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    width: 100%;
-}
-
-.TopsSeven {
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    overflow: hidden;
-    display: flex;
-    width: 100%;
-}
-
 main {
-    display: relative;
+    display: block;
 }
 
-.topfilm {
+section {
     display: flex;
-    padding-left: 50px;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
 }
 
-.topfilmBasicInfos {
+section div {
+    display: flex;
+    align-items: center;
+}
+
+.top-film-basic-infos {
     background-color: grey;
     color: white;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 20px;
     background-color: #4d6864;
-}
-
-.bestfilms {
-    display: flex;
-}
-
-.bestaction {
-    display: flex;
-}
-
-.bestfamily {
-    display: flex;
-}
-
-.bestdrama {
-    display: flex;
+    padding: 20px;
 }
 
 
 /* Gestion du Caroussel*/
 
-.carrousel {
-    position: flex;
-    padding-left: 20px;
-    padding-right: 20px;
+.carrousels-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.carrousels-container>* {}
 
 .arrow_left {
     width: 0;
@@ -96,7 +55,6 @@ main {
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     border-right: 20px solid rgb(250, 250, 50);
-    padding-right: 10px;
 }
 
 .arrow_right {
@@ -105,60 +63,39 @@ main {
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     border-left: 20px solid rgb(250, 250, 50);
-    padding-left: 10px;
 }
 
 
 /* Gestion de la modale */
 
-.filmdetailsmodal {
+.film-details-modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
 }
 
 
 /* Modal Content/Box */
 
-.filmdetails-modal-content {
+.film-details-modal-content {
+    position: relative;
+    left: 50px;
+    top: 50px;
     background-color: #fefefe;
     color: black;
     margin: 15% auto;
-    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    /* Could be more or less, depending on screen size */
 }
 
-
-/* The Close Button */
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+footer {
+    text-align: right;
 }

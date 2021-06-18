@@ -5,10 +5,10 @@ const BEST_ACTION = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&gen
 const BEST_DRAMA = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&genre=drama&sort_by=-imdb_score&sort_by=-votes"
 const BEST_FAMILY = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&genre=family&sort_by=-imdb_score&sort_by=-votes"
 
-let topAll;
-let topAction;
-let topFamily;
-let topDrama;
+let top_all = [];
+let top_action = [];
+let top_family = [];
+let top_drama = [];
 
 
 async function fetchFilmsBasicInfos(page_url) {
@@ -24,12 +24,12 @@ async function fetchFilmsBasicInfos(page_url) {
 // exemple à suivre !! mais gestion affichage des infos differente..
 async function handleTopFilm() {
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    let top_film_infos_section = document.querySelector(".topfilmBasicInfos");
+    let top_film_infos_section = document.querySelector(".top-film-basic-infos");
     let film_infos = await getInfos(films[0].id);
-    top_film_infos_section.innerHTML = `<img src="${film_infos.image_url}">`
+    top_film_infos_section.innerHTML += `<img src="${film_infos.image_url}">`
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
-            top_film_infos_section.innerHTML += `<p>${key}: ${value}</p>`;
+            top_film_infos_section.innerHTML += `<p>${value}</p>`;
         };
     };
 
@@ -40,24 +40,24 @@ async function handleTopFilm() {
 //essayer de factoriser en handleTops(category) avec variable category et if all : shift() 
 
 async function handleTopAll() {
-    topAll = await fetchFilmsBasicInfos(BEST_OF_ALL);
-    topAll.shift();
-    handleCarrousel('bestfilms', '');
+    top_all = await fetchFilmsBasicInfos(BEST_OF_ALL);
+    top_all.shift();
+    handleCarrousel('best-films', '');
 };
 
 async function handleTopAction() {
-    topAction = await fetchFilmsBasicInfos(BEST_ACTION);
-    handleCarrousel('bestaction', '');
+    top_action = await fetchFilmsBasicInfos(BEST_ACTION);
+    handleCarrousel('best-action', '');
 };
 
 async function handleTopFamily() {
-    topFamily = await fetchFilmsBasicInfos(BEST_FAMILY);
-    handleCarrousel('bestfamily', '');
+    top_family = await fetchFilmsBasicInfos(BEST_FAMILY);
+    handleCarrousel('best-family', '');
 };
 
 async function handleTopDrama() {
-    topDrama = await fetchFilmsBasicInfos(BEST_DRAMA);
-    handleCarrousel('bestdrama', '');
+    top_drama = await fetchFilmsBasicInfos(BEST_DRAMA);
+    handleCarrousel('best-drama', '');
 };
 
 
@@ -85,16 +85,14 @@ async function getInfos(film_id) {
 };
 
 //Affichage des infos pour un film
-// à améliorer + bouton close foireux
 async function showDetailedInfos(film_id) {
     film_infos = await getInfos(film_id);
 
-    let modal = document.getElementById("myModal"); // Get the modal
-    let span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
-    let content = document.getElementById("myModalContent");
+    let modal = document.getElementById("my-modal");
+    let content = document.getElementById("my-modal-content");
     content.innerHTML = '';
 
-    modal.style.display = "block"; // When the user clicks on the button, open the modal
+    modal.style.display = "block";
 
     content.innerHTML = `<img src="${film_infos.image_url}">`
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
@@ -102,9 +100,7 @@ async function showDetailedInfos(film_id) {
             content.innerHTML += `<p>${key}: ${value}</p>`;
         };
     };
-    span.onclick = function() {
-        modal.style.display = "none";
-    };
+
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
@@ -113,33 +109,32 @@ async function showDetailedInfos(film_id) {
 }
 
 
-
-// Gestion du Carrousel, à refactoriser
-async function handleCarrousel(category, up_or_down) {
-    let films;
-    let new_films;
+// Gestion du Carrousel
+async function handleCarrousel(category, direction) {
+    let films = [];
+    let new_films = [];
     let carrousel;
 
-    //mettre dans une fonction à part
-    if (category == 'bestfilms') {
-        films = topAll;
-        carrousel = document.querySelector(".bestfilms > .carrousel");
-    } else if (category == 'bestaction') {
-        films = topAction;
-        carrousel = document.querySelector(".bestaction > .carrousel");
-    } else if (category == 'bestfamily') {
-        films = topFamily;
-        carrousel = document.querySelector(".bestfamily > .carrousel");
-    } else if (category == 'bestdrama') {
-        films = topDrama;
-        carrousel = document.querySelector(".bestdrama > .carrousel");
+    // placer le carrousel
+    if (category == 'best-films') {
+        films = top_all;
+        carrousel = document.querySelector(".best-films .carrousel");
+    } else if (category == 'best-action') {
+        films = top_action;
+        carrousel = document.querySelector(".best-action .carrousel");
+    } else if (category == 'best-family') {
+        films = top_family;
+        carrousel = document.querySelector(".best-family .carrousel");
+    } else if (category == 'best-drama') {
+        films = top_drama;
+        carrousel = document.querySelector(".best-drama .carrousel");
     };
 
-    //mettre dans une fonction à part 
-    if (up_or_down == 'up') {
+    // parcourir le carrousel vers la gauche ou la droite
+    if (direction == 'to-right') {
         new_films = films.slice(1);
         new_films.push(films[0]);
-    } else if (up_or_down == 'down') {
+    } else if (direction == 'to-left') {
         new_films = films.slice(0, -1);
         new_films.unshift(films[6]);
     } else {
@@ -152,17 +147,16 @@ async function handleCarrousel(category, up_or_down) {
         };
     });
 
-    if (category == 'bestfilms') {
-        topAll = new_films;
-    } else if (category == 'bestaction') {
-        topAction = new_films;
-    } else if (category == 'bestfamily') {
-        topFamily = new_films;
-    } else if (category == 'bestdrama') {
-        topDrama = new_films;
+    if (category == 'best-films') {
+        top_all = new_films;
+    } else if (category == 'best-action') {
+        top_action = new_films;
+    } else if (category == 'best-family') {
+        top_family = new_films;
+    } else if (category == 'best-drama') {
+        top_drama = new_films;
     };
 };
-
 
 
 // Chargement  au démarrage
