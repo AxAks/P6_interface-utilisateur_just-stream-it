@@ -21,7 +21,6 @@ async function fetchFilmsBasicInfos(page_url) {
 
 
 //Gestion du TOP FILM 
-// exemple à suivre !! mais gestion affichage des infos differente..
 async function handleTopFilm() {
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     let film_infos = await getInfos(films[0].id);
@@ -31,7 +30,7 @@ async function handleTopFilm() {
     let more_infos_button = document.querySelector(".more-infos-button");
 
     top_film_poster.innerHTML = `<img src="${film_infos.image_url}">`;
-    more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${films[0].id})">More Infos</p>`; // pas bien car je ne peux pas manipuler le bouton
+    more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${films[0].id})">More Infos</p>`;
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
             top_film_infos_section.innerHTML += `<p>${value}</p>`;
@@ -41,8 +40,6 @@ async function handleTopFilm() {
 };
 
 // Gestion des Top Categories
-//essayer de factoriser en handleTops(category) avec variable category et if all : shift() 
-
 async function handleTopAll() {
     top_all = await fetchFilmsBasicInfos(BEST_OF_ALL);
     top_all.shift();
@@ -164,7 +161,6 @@ async function handleCarrousel(category, direction) {
 };
 
 
-// Chargement  au démarrage
 document.addEventListener('DOMContentLoaded', async() => {
     handleTopFilm();
     handleTopAll();
