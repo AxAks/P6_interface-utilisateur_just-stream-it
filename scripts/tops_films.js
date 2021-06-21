@@ -63,7 +63,6 @@ async function handleTopDrama() {
 
 
 //Récuperation des infos pour un film
-// à améliorer
 async function getInfos(film_id) {
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos = await response.json();
