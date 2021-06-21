@@ -54,6 +54,7 @@ section div {
     align-items: center;
     text-indent: 1vw;
     font-size: 1vw;
+    border-radius: 20px;
 }
 
 .more-infos-button {
@@ -61,7 +62,7 @@ section div {
     background-color: #1c0c2a;
     color: #e1dfba;
     text-align: left;
-    border-radius: 50%;
+    border-radius: 50px;
     padding: 5px 32px;
     display: inline-block;
     font-size: 16px;
