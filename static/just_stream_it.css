@@ -4,17 +4,17 @@ avec un point : class -> à privilégier mais quand on ne peut pas utiliser la h
 si possible utiliser au max la hierarchie du DOM
 */
 
+body {
+    background-color: #1c0c2a;
+    color: #fafa32;
+    font-size-adjust: inherit;
+}
+
 header h1 {
     text-align: center;
     font-family: cursive;
     font-size: 2vw;
-    background-color: rgb(20, 20, 20);
-}
-
-body {
-    background-color: rgb(20, 20, 20);
-    color: rgb(250, 250, 50);
-    font-size-adjust: inherit;
+    background-color: #1c0c2a;
 }
 
 main div {
@@ -42,16 +42,37 @@ section div {
 
 .top-film-poster {
     position: relative;
+    padding-bottom: 10px;
 }
 
 .top-film-basic-infos {
     display: flex;
     flex-direction: column;
-    color: white;
-    background-color: #4d6864;
+    color: #343b99;
+    background-color: #7f7e90;
     padding: 20px;
     align-items: center;
     text-indent: 1vw;
+    font-size: 1vw;
+}
+
+.more-infos-button {
+    position: static;
+    background-color: #1c0c2a;
+    color: #e1dfba;
+    text-align: left;
+    border-radius: 50%;
+    padding: 5px 32px;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.more-infos-button:hover {
+    color: #343b99;
+}
+
+.flex {
+    display: flex;
 }
 
 
@@ -62,8 +83,6 @@ section div {
     flex-direction: column;
     align-items: center;
 }
-
-.carrousels-container>* {}
 
 .arrow_left {
     width: 0;
@@ -105,8 +124,8 @@ section div {
     position: relative;
     left: 50px;
     top: 50px;
-    background-color: #fefefe;
-    color: black;
+    background-color: #1c0c2a;
+    color: #e1dfba;
     margin: 2% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -116,4 +135,5 @@ section div {
 footer {
     text-align: right;
     font-family: cursive;
+    font-size: 1.5vw;
 }

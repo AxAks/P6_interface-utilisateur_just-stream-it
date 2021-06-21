@@ -30,14 +30,14 @@ async function handleTopFilm() {
     let top_film_infos_section = document.querySelector(".top-film-basic-infos");
     let more_infos_button = document.querySelector(".more-infos-button");
 
-    top_film_poster.innerHTML = `<img src="${film_infos.image_url}">`
+    top_film_poster.innerHTML = `<img src="${film_infos.image_url}">`;
+    more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${films[0].id})">More Infos</p>`; // pas bien car je ne peux pas manipuler le bouton
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
             top_film_infos_section.innerHTML += `<p>${value}</p>`;
         };
-        more_infos_button.innerHTML = `<button onclick="showDetailedInfos(${films[0].id})"> Plus d'infos</button>`; // pas bien car je ne peux pas manipuler le bouton
-    };
 
+    };
 };
 
 // Gestion des Top Categories
@@ -118,7 +118,7 @@ async function showDetailedInfos(film_id) {
 async function handleCarrousel(category, direction) {
     let films = [];
     let new_films = [];
-    let carrousel;
+    let carrousel = null;
 
     // placer le carrousel
     if (category == 'best-films') {
