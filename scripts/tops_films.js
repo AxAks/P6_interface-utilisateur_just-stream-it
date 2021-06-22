@@ -30,7 +30,7 @@ async function handleTopFilm() {
     let more_infos_button = document.querySelector(".more-infos-button");
 
     top_film_poster.innerHTML = `<img src="${film_infos.image_url}">`;
-    more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${film_infos.id})">More Infos</p>`;
+    more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${films[0].id})">More Infos</p>`;
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
             top_film_infos_section.innerHTML += `<p>${value}</p>`;

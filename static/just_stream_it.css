@@ -127,7 +127,7 @@ section div {
 /* Modal Content/Box */
 
 .film-details-modal-content {
-    position: relative;
+    position: static;
     left: 50px;
     top: 50px;
     background-color: #1c0c2a;
