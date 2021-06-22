@@ -52,17 +52,18 @@ section div {
     background-color: #7f7e90;
     padding: 20px;
     text-align: center;
-    align-items: left;
+    align-items: center;
     font-size: 1vw;
     border-radius: 20px;
 }
 
 .top-film-basic-infos p {
-    align-items: right
+    align-items: right;
+    position: stretch;
 }
 
 .more-infos-button {
-    position: static;
+    position: relative;
     background-color: #1c0c2a;
     color: #e1dfba;
     border-radius: 50px;
