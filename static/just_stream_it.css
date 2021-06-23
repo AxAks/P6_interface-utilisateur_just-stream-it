@@ -12,7 +12,7 @@ body {
 
 header h1 {
     text-align: center;
-    font-family: cursive;
+    font-family: cursive, 'New Century Schoolbook', auto;
     font-size: 2vw;
     background-color: #1c0c2a;
 }
@@ -28,7 +28,7 @@ section {
 }
 
 section h3 {
-    font-family: cursive;
+    font-family: cursive, 'New Century Schoolbook', auto;
     font-size: 1vw;
 }
 
@@ -181,6 +181,6 @@ section div {
 
 footer {
     text-align: right;
-    font-family: cursive;
+    font-family: cursive, 'New Century Schoolbook', auto;
     font-size: 1.5vw;
 }
