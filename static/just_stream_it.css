@@ -41,7 +41,7 @@ section div {
 }
 
 .top-film-poster {
-    float: inline-end;
+    float: right;
     position: relative;
     padding-bottom: 10px;
 }
@@ -166,7 +166,7 @@ section div {
 }
 
 .film-details-modal-content img {
-    float: inline-end;
+    float: right;
     width: 15%;
 }
 
