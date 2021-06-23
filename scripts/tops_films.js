@@ -97,7 +97,11 @@ async function showDetailedInfos(film_id) {
     content.innerHTML = `<img src="${film_infos.image_url}">`
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key != 'Description') {
-            content.innerHTML += `<p>${key}: ${value}</p>`;
+            if (key == 'Duration') {
+                content.innerHTML += `<p><em>${key}</em>: ${value} min</p>`;
+            } else {
+                content.innerHTML += `<p><em>${key}</em>: ${value}</p>`;
+            };
         };
     };
 
