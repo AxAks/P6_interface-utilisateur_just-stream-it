@@ -62,6 +62,10 @@ section div {
     font-style: oblique;
 }
 
+.top-film-basic-infos p em {
+    color: #fafa32;
+}
+
 .more-infos-button {
     position: relative;
     background-color: #1c0c2a;

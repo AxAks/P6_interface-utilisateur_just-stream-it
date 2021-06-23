@@ -33,7 +33,7 @@ async function handleTopFilm() {
     more_infos_button.innerHTML = `<p onclick="showDetailedInfos(${films[0].id})">More Infos</p>`;
     for (const [key, value] of Object.entries(film_infos.required_infos)) {
         if (key == 'Title' || key == 'Description') {
-            top_film_infos_section.innerHTML += `<p>${value}</p>`;
+            top_film_infos_section.innerHTML += `<p><em>*</em> ${value} <em>*</em></p>`;
         };
     };
 };
