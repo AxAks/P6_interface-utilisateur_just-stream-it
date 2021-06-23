@@ -98,12 +98,29 @@ section div {
     padding-right: 2%;
 }
 
+.arrow_left:hover {
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-right: 20px solid #343b99;
+    padding-right: 2%;
+}
+
 .arrow_right {
     width: 0;
     height: 0;
     border-top: 16px solid transparent;
     border-bottom: 16px solid transparent;
     border-left: 20px solid #fafa32;
+}
+
+.arrow_right:hover {
+    width: 0;
+    height: 0;
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+    border-left: 20px solid #343b99;
 }
 
 
