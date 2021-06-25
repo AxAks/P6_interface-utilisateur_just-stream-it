@@ -149,6 +149,14 @@ section div {
     border-radius: 10px;
 }
 
+img {
+    cursor: pointer;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
 
 /* Modal Content/Box */
 
