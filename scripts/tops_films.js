@@ -1,4 +1,3 @@
-// CONSTANTS
 const MAIN = "http://localhost:8000/api/v1/titles/"
 const BEST_OF_ALL = "http://localhost:8000/api/v1/titles/?page=1&page_size=8&sort_by=-imdb_scores&sort_by=-votes"
 const BEST_ACTION = "http://localhost:8000/api/v1/titles/?page=1&page_size=7&genre=action&sort_by=-imdb_score&sort_by=-votes"
