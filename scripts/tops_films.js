@@ -20,7 +20,7 @@ async function fetchFilmsBasicInfos(page_url) {
 }
 
 
-//Gestion du TOP FILM 
+//TOP FILM 
 async function handleTopFilm() {
     const films = await fetchFilmsBasicInfos(BEST_OF_ALL);
     let film_infos = await getInfos(films[0].id);
@@ -38,7 +38,7 @@ async function handleTopFilm() {
     };
 };
 
-// Gestion des Top Categories
+//Tops Categories
 async function handleTopAll() {
     top_all = await fetchFilmsBasicInfos(BEST_OF_ALL);
     top_all.shift();
@@ -61,7 +61,7 @@ async function handleTopDrama() {
 };
 
 
-//Récuperation des infos pour un film
+// Get infos for one film
 async function getInfos(film_id) {
     let response = await fetch(`http://localhost:8000/api/v1/titles/${film_id}`);
     let detailed_infos = await response.json();
@@ -84,7 +84,7 @@ async function getInfos(film_id) {
 
 };
 
-//Affichage des infos pour un film
+// Display detailled infos for one film in a modal
 async function showDetailedInfos(film_id) {
     film_infos = await getInfos(film_id);
 
@@ -113,13 +113,13 @@ async function showDetailedInfos(film_id) {
 }
 
 
-// Gestion du Carrousel
+// Carrousel
 async function handleCarrousel(category, direction) {
     let films = [];
     let new_films = [];
     let carrousel = null;
 
-    // placer le carrousel
+    // Display carrousel
     if (category == 'best-films') {
         films = top_all;
         carrousel = document.querySelector(".best-films .carrousel");
@@ -134,7 +134,7 @@ async function handleCarrousel(category, direction) {
         carrousel = document.querySelector(".best-drama .carrousel");
     };
 
-    // parcourir le carrousel vers la gauche ou la droite
+    // Browse carrousel left or right
     if (direction == 'to-right') {
         new_films = films.slice(1);
         new_films.push(films[0]);
@@ -162,7 +162,7 @@ async function handleCarrousel(category, direction) {
     };
 };
 
-
+// Launch functions when DOM is ready
 document.addEventListener('DOMContentLoaded', async() => {
     handleTopFilm();
     handleTopAll();
