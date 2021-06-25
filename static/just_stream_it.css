@@ -31,7 +31,6 @@ section div {
     align-items: center;
     padding-left: 1vw;
     padding-right: 1vw;
-    ;
 }
 
 .top-film-poster {
@@ -119,6 +118,14 @@ section div {
     border-left: 20px solid #343b99;
 }
 
+img {
+    cursor: pointer;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
 .film-details-modal {
     display: none;
     position: fixed;
@@ -131,14 +138,6 @@ section div {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
-}
-
-img {
-    cursor: pointer;
-}
-
-.selectable {
-    cursor: pointer;
 }
 
 .film-details-modal-content {
